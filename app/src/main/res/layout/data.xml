@@ -11,6 +11,7 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:singleLine="true"
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:text="@string/sample" />
@@ -21,7 +22,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:maxLength="8"
             android:singleLine="true"
             android:text="@string/sample"
             android:textColor="@android:color/black"

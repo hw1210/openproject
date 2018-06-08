@@ -190,7 +190,7 @@ public class MonthAdapter extends BaseAdapter {
         itemView.setPadding(2, 2, 2, 2);
 
         // set properties
-        itemView.setGravity(Gravity.LEFT);
+        itemView.setGravity(Gravity.START);
 
         if (columnIndex == 0) {
             itemView.setTextColor(Color.RED);

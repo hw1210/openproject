@@ -39,7 +39,7 @@ public class theme extends AppCompatActivity {
             public void onClick(View v) {
                 Toolbar toolbar=(Toolbar)findViewById(R.id.Toolbar);
                 setSupportActionBar(toolbar);
-                toolbar.setBackgroundColor(getResources().getColor(R.color.Red));
+                toolbar.setBackgroundColor((Color.rgb(233,191,120)));
 
             }
         });
