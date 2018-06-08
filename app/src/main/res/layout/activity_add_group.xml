@@ -137,15 +137,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/그룹멤버" />
 
-            <MultiAutoCompleteTextView
+            <TextView
                 android:id="@+id/name"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:singleLine="true"
-                android:textSize="15sp"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:textSize="20dp"
                 android:background="#89C7B6"
-                android:hint="@string/사용자" />
+                android:text="@string/사용자" />
 
         </LinearLayout>
     </LinearLayout>
@@ -159,7 +160,7 @@
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_delete" />
+        app:srcCompat="@drawable/ic_action_cancle" />
 
     <android.support.design.widget.FloatingActionButton
                 android:id="@+id/RegisterS"
@@ -170,7 +171,7 @@
                 app:backgroundTint="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@android:drawable/ic_input_add" />
+                app:srcCompat="@drawable/ic_action_puls" />
 
 
 

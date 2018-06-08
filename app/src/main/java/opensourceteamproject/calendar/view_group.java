@@ -10,11 +10,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
 
 public class view_group extends AppCompatActivity {
     Button btn_mySelf;
     Button btn_myGroup;
     Button btn_myHome;
+    final String[] GroupData={"오픈소스","데베","컴그"};//sample
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,8 @@ public class view_group extends AppCompatActivity {
         btn_myHome.setOnClickListener(btn_myHomeClickListener);
         btn_mySelf=(Button)findViewById(R.id.mySelf);
         btn_mySelf.setOnClickListener(btn_mySelfClickListener);
+
+
 
     }
 

@@ -50,7 +50,7 @@ public class Group_List extends AppCompatActivity {
         GroupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), add_group.class);
+                Intent intent = new Intent(Group_List.this, add_group.class);
                 startActivity(intent);
                 finish();
                 }

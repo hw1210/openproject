@@ -22,7 +22,7 @@ public class theme extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme);
 
-        Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
+        final Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(Color.rgb(93,181,164));
         toolbar.setTitleTextColor(Color.WHITE);
@@ -33,43 +33,38 @@ public class theme extends AppCompatActivity {
         btn_mySelf=(Button)findViewById(R.id.mySelf);
         btn_mySelf.setOnClickListener(btn_mySelfClickListener);
 
-        FloatingActionButton button1=(FloatingActionButton) findViewById(R.id.redButton);
-        button1.setOnClickListener(new View.OnClickListener() {
+        setSupportActionBar(toolbar);
+        FloatingActionButton button=(FloatingActionButton) findViewById(R.id.redButton);
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toolbar toolbar=(Toolbar)findViewById(R.id.Toolbar);
-                setSupportActionBar(toolbar);
+            public void onClick(View v){
                 toolbar.setBackgroundColor((Color.rgb(233,191,120)));
 
             }
         });
 
-        FloatingActionButton button2=(FloatingActionButton) findViewById(R.id.blueButton);
-        button2.setOnClickListener(new View.OnClickListener() {
+        button=(FloatingActionButton) findViewById(R.id.blueButton);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toolbar toolbar=(Toolbar)findViewById(R.id.Toolbar);
-                setSupportActionBar(toolbar);
                 toolbar.setBackgroundColor(getResources().getColor(R.color.Blue));
             }
         });
 
-        FloatingActionButton button3=(FloatingActionButton) findViewById(R.id.blackButton);
-        button3.setOnClickListener(new View.OnClickListener() {
+        button=(FloatingActionButton) findViewById(R.id.blackButton);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toolbar toolbar=(Toolbar)findViewById(R.id.Toolbar);
-                setSupportActionBar(toolbar);
                 toolbar.setBackgroundColor(getResources().getColor(R.color.Black));
             }
         });
 
-        FloatingActionButton button4=(FloatingActionButton) findViewById(R.id.greenButton);
-        button4.setOnClickListener(new View.OnClickListener() {
+        button=(FloatingActionButton) findViewById(R.id.greenButton);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toolbar toolbar=(Toolbar)findViewById(R.id.Toolbar);
-                setSupportActionBar(toolbar);
+
                 toolbar.setBackgroundColor(getResources().getColor(R.color.Green));
             }
         });
