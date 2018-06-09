@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="opensourceteamproject.calendar">
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/> //내 전화번호 읽는 권한 추가
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".MySelfActivity"
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name=".Scheduling_MySelf"
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".MyGroupActivity"
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".Scheduling_MyGroup"
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+
+        <activity android:name=".add_group" android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".Group_List" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".view_group" android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".theme" android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".SchedulingActivity" android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".setting" android:windowSoftInputMode="adjustNothing"></activity>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,83 @@
+**xml -> java
+
+//연결 툴
+홈
+MainActivity.java
+개인일정
+MySelfActivity.java, myself.xml 
+DataAdapter_Myself.java, Data.java, data.xml (일정 리스트 디데이/할일명/날짜 로 구분하기 위한 툴)
+개인일정생성
+Scheduling_MySelf.java, scheduling.xml
+그룹일정
+MyGroupActivity.java, mygroup.xml
+DataAdapter_MyGroup.java, Data_Group.java, Data.java, data_group.xml, data.xml  (일정 리스트 그룹/디데이/할일명/날짜 로 구분하기 위한 툴)
+그룹일정생성
+Scheduling_MyGroup.java, scheduling.xml
+
+//개인 일정 리스트, 그룹 일정 리스트<data.xml> 
+mdday
+mtitle
+mdate
+
+//그룹 일정 리스트 <data_group.xml>
+mgroup
+
+//개인 일정 리스트<myself.xml>
+list_mySelf
+
+//그룹 일정 리스트<mygroup.xml>
+list_myGroup
+
+//메뉴<menu.xml>
+1) 그룹 생성
+menu_bt1
+2) 그룹 표시
+menu_bt2
+3) 테마 설정
+menu_bt3
+4) 설정
+menu_bt4
+
+//상단 버튼<모든 layout, 툴바 Toolbar 안에>
+1)홈
+myHome 
+2)개인일정
+mySelf -> btn_mySelf
+3)그룹일정
+myGroup -> btn_myGroup
+
+//하단 버튼
+1) 일정 생성 버튼
+makeS -> btn_MakeS
+2) 일정 등록 버튼
+RegisterS -> btn_RegisterS
+3) 일정 취소 버튼
+CancelS -> btn_CancelS
+
+//일정 생성 (종류)
+1) dDay (switch)
+list_dDay 
+select_dDay -> btn_dDay
+2) title (editText)
+select_title ->
+3) date (datePicker)
+list_date 
+select_date -> btn_date
+4) allDay (switch)
+list_allDay -> show_allDay
+select_allDay -> btn_allDay
+5) startTime (timePicker)
+list_startTime -> show_startTime
+select_startTime -> btn_endTime
+6) endTime (timePicker) 
+list_endTime -> show_endTime
+select_endTime -> btn_endTime
+7) calendar (toggleButton)
+list_calendar -> show_calendar
+select_calendar -> btn_calendar
+8) group (spinner) 
+list_group -> show_group
+select_group -> btn_group
+
+
+
