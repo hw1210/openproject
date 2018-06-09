@@ -20,7 +20,7 @@ public class MySelfActivity extends AppCompatActivity{
     FloatingActionButton btn_MakeS;
     Button btn_myHome;
 
-    Data data_container[];
+    Data data_container;
     ArrayList<Data> instanceList = new ArrayList<>();
     DataAdapter_MySelf dataAdapter;
     ListView listView;
@@ -49,10 +49,10 @@ public class MySelfActivity extends AppCompatActivity{
     }
 
     public void initListView() {
-        for(int i=0;data_container[i].equals(null);i++){
+        /*for(int i=0;data_container[i].equals(null);i++){
             data_container[i]=null;
             instanceList.add(data_container[i]);
-        }
+        }*/
         dataAdapter = new DataAdapter_MySelf(this, instanceList);
         listView = (ListView) findViewById(R.id.list_mySelf);
         listView.setAdapter(dataAdapter);

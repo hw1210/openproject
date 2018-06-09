@@ -18,9 +18,9 @@ public class setting extends AppCompatActivity {
     Button btn_myGroup;
     Button btn_myHome;
 
-    EditText myPhone=(EditText)findViewById(R.id.input_phone);
-    EditText myName=(EditText)findViewById(R.id.input_myName);
-    Button setting=(Button)findViewById(R.id.myName_button);
+//    EditText myPhone=(EditText)findViewById(R.id.input_phone);
+//    EditText myName=(EditText)findViewById(R.id.input_myName);
+//    Button setting=(Button)findViewById(R.id.myName_button);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +38,18 @@ public class setting extends AppCompatActivity {
         btn_mySelf=(Button)findViewById(R.id.mySelf);
         btn_mySelf.setOnClickListener(btn_mySelfClickListener);
 
-        myPhone.getText();
+        /*myPhone.getText();
         myName.getText();
 
         if(setting.isClickable()){//이름 변경 시
-            /*if(){//이름 설정 가능할 경우
+            if(){//이름 설정 가능할 경우
             myName.setText(이름~);
             Toast.makeText(getApplicationContext(),"이름이 설정되었습니다.",Toast.LENGTH_SHORT).show();
             };
             else{//이름 설정 불가능한 경우(중복)
                 Toast.makeText(getApplicationContext(),"중복된 이름입니다.",Toast.LENGTH_SHORT).show();
-            }*/
-        }
+            }
+        }*/
     }
 
     @Override

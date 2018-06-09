@@ -40,11 +40,11 @@ public class Group_List extends AppCompatActivity {
         btn_mySelf.setOnClickListener(btn_mySelfClickListener);
 
 
-        final String[] GroupData=null;
+        String[] GroupData={"null"};
 
         ListView GroupList=(ListView)findViewById(R.id.group_list);
 
-       ArrayAdapter<String> Adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,GroupData);
+        ArrayAdapter<String> Adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,GroupData);
         GroupList.setAdapter(Adapter);
 
         GroupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

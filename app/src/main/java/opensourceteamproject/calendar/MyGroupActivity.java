@@ -22,9 +22,9 @@ public class MyGroupActivity extends AppCompatActivity {
     Button btn_myHome;
     ToggleButton btn_calendar;
 
-    Data data_container[];
-    ArrayList<Data> instanceList[];
-    Data_Group GroupData[];
+    Data data_container;
+    ArrayList<Data> instanceList=new ArrayList<Data>();;
+    Data_Group GroupData;
     ArrayList<Data_Group> instance;
     DataAdapter_MyGroup dataAdapter;
     ExpandableListView listView;
@@ -53,15 +53,22 @@ public class MyGroupActivity extends AppCompatActivity {
     }
 
     public void initListView() {
-        for(int i=0;data_container[i].equals(null);i++){ //할 일
+        /*data_container=new Data("D-10","오픈소스","2018/06/11");
+        instanceList.add(data_container);*/
+
+        /*for(int i=0;data_container[i].equals(null);i++){ //할 일
             data_container[i]=null;//new Data=(dday,할일명,날짜);
             //instanceList[그룹(id).add(data_container[i]);
-        }
+        }*/
+        //GroupData=new Data_Group("",instanceList);
+        instance=new ArrayList<Data_Group>();
+        //instance.add(GroupData);
 
-        for(int j=0;GroupData[j].equals(null);j++){
+        /*for(int j=0;GroupData[j].equals(null);j++){
             GroupData[j]=null;//new Data_Group(그룹명,할일리스트);
             instance.add(GroupData[j]); //리스트뷰에 넣을 그룹리스트 합
-        }
+        }*/
+
         dataAdapter = new DataAdapter_MyGroup(this, instance);
         listView = (ExpandableListView) findViewById(R.id.list_myGroup);
         listView.setAdapter(dataAdapter);

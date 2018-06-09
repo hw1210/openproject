@@ -89,10 +89,11 @@ public class SchedulingActivity extends AppCompatActivity {
 
         String dateAndTime=scheduleYear+"-"+scheduleMonth+"-"+scheduleDay+"-"+startHour+"-"+startMinute+"-"+endHour+"-"+endMinute;
 
-        final String[] GroupData=null;
+        String[] GroupData={"null"};
         ArrayAdapter<String> adapter_group=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,GroupData);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         btn_group.setAdapter(adapter_group);
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

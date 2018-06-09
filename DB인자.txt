@@ -1,0 +1,30 @@
+
+//그룹 생성
+그룹명 groupName
+조회할 멤버번호 memberNumber
+추가(버튼) group_member_button
+
+//홈
+달력(그리드뷰) monthView
+
+//설정
+계정(핸드폰번호) input_phone
+이름 설정 input_myName
+설정(버튼) myName_button
+
+//설정
+핸드폰 번호 myPhone
+이름 myName
+
+//
+그룹 GroupData[]
+(String group,ArrayList<Data> data);->그룹 일정 시에만, 평소엔 그룹 이름만 불러옴(그룹나열)
+할일 data_container[]=(String dDay,String title,String date)
+
+//일정 생성
+디데이 btn_dDay
+하루종일 btn_allDay;
+캘린더종류(개인/그룹) btn_calendar;
+그룹종류 btn_group;
+날짜와 시간 dateAndTime 
+<scheduleYear+"-"+scheduleMonth+"-"+scheduleDay+"-"+startHour+"-"+startMinute+"-"+endHour+"-"+endMinute>
