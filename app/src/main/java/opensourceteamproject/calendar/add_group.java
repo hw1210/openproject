@@ -199,7 +199,7 @@ public class add_group extends AppCompatActivity {
         protected String doInBackground(String... strings) {//빨간줄 떠서 막음
             try{
                 // StringBuffer sMsg=new StringBuffer();
-                URL url=new URL("http://"+ipchange+":8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로
+                URL url=new URL("http://"+ipchange+":8084/dbconn/selectuserinfo.jsp"); //보낼 jsp 경로
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
                 conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");

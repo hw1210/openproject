@@ -32,6 +32,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Scheduling_MyGroup extends AppCompatActivity {
     String ipchange="172.16.29.64";
@@ -49,6 +50,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
     EditText btn_title;
 
     int scheduleYear,scheduleMonth,scheduleDay,startHour,startMinute,endHour,endMinute;
+    ArrayList<String> GroupData;
 
     String title="";
     String dDay="1";
@@ -107,15 +109,24 @@ public class Scheduling_MyGroup extends AppCompatActivity {
 
         dateAndTime=scheduleYear+"-"+scheduleMonth+"-"+scheduleDay+"-"+startHour+"-"+startMinute+"-"+endHour+"-"+endMinute;
 
-        String[] GroupData={"sample"};
+        GroupData=new ArrayList<>();
         ArrayAdapter<String> adapter_group=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,GroupData);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        btn_group.setPrompt("");
         btn_group.setAdapter(adapter_group);
-
-        //int pos=btn_group.getSelectedItemPosition();
-        group=((TextView)(btn_group.getSelectedView())).getText().toString();
-
+        btn_group.setOnItemSelectedListener(groupSelectedListener);
     }
+
+    AdapterView.OnItemSelectedListener groupSelectedListener=new AdapterView.OnItemSelectedListener(){
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            group=GroupData.get(position);
+        }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            Toast.makeText(getApplicationContext(),"그룹을 선택해주세요.",Toast.LENGTH_SHORT).show();
+        }
+    };
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);
