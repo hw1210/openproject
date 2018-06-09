@@ -10,17 +10,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class setting extends AppCompatActivity {
     Button btn_mySelf;
     Button btn_myGroup;
     Button btn_myHome;
 
+    EditText myPhone=(EditText)findViewById(R.id.input_phone);
+    EditText myName=(EditText)findViewById(R.id.input_myName);
+    Button setting=(Button)findViewById(R.id.myName_button);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-
 
         Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
@@ -33,7 +38,18 @@ public class setting extends AppCompatActivity {
         btn_mySelf=(Button)findViewById(R.id.mySelf);
         btn_mySelf.setOnClickListener(btn_mySelfClickListener);
 
+        myPhone.getText();
+        myName.getText();
 
+        if(setting.isClickable()){//이름 변경 시
+            /*if(){//이름 설정 가능할 경우
+            myName.setText(이름~);
+            Toast.makeText(getApplicationContext(),"이름이 설정되었습니다.",Toast.LENGTH_SHORT).show();
+            };
+            else{//이름 설정 불가능한 경우(중복)
+                Toast.makeText(getApplicationContext(),"중복된 이름입니다.",Toast.LENGTH_SHORT).show();
+            }*/
+        }
     }
 
     @Override
@@ -44,15 +60,6 @@ public class setting extends AppCompatActivity {
         return true;
 
     }
-
-    View.OnClickListener MakeSClickListener=new View.OnClickListener(){
-        public void onClick(View v){
-            Intent intent=new Intent(getApplicationContext(),SchedulingActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    };
-
 
     public boolean onOptionsItemSelected(MenuItem item) {
 

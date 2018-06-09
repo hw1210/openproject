@@ -79,17 +79,18 @@ public class SchedulingActivity extends AppCompatActivity {
         btn_allDay.setOnClickListener(btn_allDayClickListener);
         btn_calendar.setOnClickListener(btn_CalendarClickListener);
 
-        /*int scheduleYear=btn_date.getYear();
+        int scheduleYear=btn_date.getYear();
         int scheduleMonth=btn_date.getMonth()+1;
         int scheduleDay=btn_date.getDayOfMonth();
         int startHour=btn_startTime.getHour();
         int startMinute=btn_startTime.getMinute();
         int endHour=btn_endTime.getHour();
-        int endMinute=btn_endTime.getMinute();*/
+        int endMinute=btn_endTime.getMinute();
 
+        String dateAndTime=scheduleYear+"-"+scheduleMonth+"-"+scheduleDay+"-"+startHour+"-"+startMinute+"-"+endHour+"-"+endMinute;
 
-        final String[] Group={"오픈소스","데베","컴그"};
-        ArrayAdapter<String> adapter_group=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,Group);
+        final String[] GroupData=null;
+        ArrayAdapter<String> adapter_group=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,GroupData);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         btn_group.setAdapter(adapter_group);
     }

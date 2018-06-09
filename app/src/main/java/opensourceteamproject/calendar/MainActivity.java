@@ -249,18 +249,10 @@ public class MainActivity extends AppCompatActivity {
 
         switch(item.getItemId()) {
 
-
                 case R.id.menu_bt1:
 
                     Intent intent1 =new Intent(MainActivity.this,Group_List.class);
                     startActivity(intent1);
-                    finish();
-                    return true;
-
-                case R.id.menu_bt2:
-
-                    Intent intent2 =new Intent(MainActivity.this,view_group.class);
-                    startActivity(intent2);
                     finish();
                     return true;
 

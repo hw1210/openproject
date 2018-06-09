@@ -12,13 +12,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
 
 public class add_group extends AppCompatActivity {
     Button btn_mySelf;
     Button btn_myGroup;
     Button btn_myHome;
 
+    EditText groupName=(EditText)findViewById(R.id.input_group_name);
+    EditText memberNumber=(EditText)findViewById(R.id.input_member_number);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +43,8 @@ public class add_group extends AppCompatActivity {
         btn_mySelf=(Button)findViewById(R.id.mySelf);
         btn_mySelf.setOnClickListener(btn_mySelfClickListener);
 
+        Button button=(Button) findViewById(R.id.group_member_button); //번호 조회하여 추가
 
-        Button button=(Button) findViewById(R.id.group_member_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,11 +53,18 @@ public class add_group extends AppCompatActivity {
             }
         });
 
+        int i=0;
+        final String[] GroupData=null;
+        ListView GroupList=(ListView)findViewById(R.id.input_member_list);
+        ArrayAdapter<String> Adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,GroupData);
+        GroupList.setAdapter(Adapter);
+
         FloatingActionButton button1=(FloatingActionButton) findViewById(R.id.RegisterS);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"새로운 그룹이 생성되었습니다.",Toast.LENGTH_SHORT).show();
                 Intent intent= new Intent(getApplicationContext(),Group_List.class);
                 startActivity(intent);
                 finish();
@@ -63,6 +76,7 @@ public class add_group extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"취소하였습니다.",Toast.LENGTH_SHORT).show();
                 Intent intent= new Intent(getApplicationContext(),Group_List.class);
                 startActivity(intent);
                 finish();
@@ -98,16 +112,6 @@ public class add_group extends AppCompatActivity {
         return true;
 
     }
-
-
-    View.OnClickListener MakeSClickListener=new View.OnClickListener(){
-        public void onClick(View v){
-            Intent intent=new Intent(getApplicationContext(),SchedulingActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    };
-
 
     public boolean onOptionsItemSelected(MenuItem item) {
 

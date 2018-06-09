@@ -40,7 +40,7 @@ public class Group_List extends AppCompatActivity {
         btn_mySelf.setOnClickListener(btn_mySelfClickListener);
 
 
-        final String[] GroupData={"오픈소스","데베","컴그"};//sample
+        final String[] GroupData=null;
 
         ListView GroupList=(ListView)findViewById(R.id.group_list);
 
