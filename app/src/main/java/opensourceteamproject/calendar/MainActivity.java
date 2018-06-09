@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,6 +51,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.os.Build.VERSION;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -160,15 +169,30 @@ public class MainActivity extends AppCompatActivity {
                 TelephonyManager telmanager=(TelephonyManager)getSystemService(TELEPHONY_SERVICE);
                 phoneNum= telmanager.getLine1Number();
                 phoneNum = phoneNum.replace("+82", "0");
-                Toast.makeText(getApplicationContext(),phoneNum,Toast.LENGTH_LONG).show();
+                ///////////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ3
+                String result;
+                CustomTask task=new CustomTask();
+                try {
+                    result = task.execute(phoneNum).get();
+                }catch(Exception e){
+
+                }
+                /////////////////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
             }
         }//end if : version check
         else{
             TelephonyManager telmanager=(TelephonyManager)getSystemService(TELEPHONY_SERVICE);
             phoneNum= telmanager.getLine1Number();
             phoneNum = phoneNum.replace("+82", "0");
-            Toast.makeText(getApplicationContext(),phoneNum,Toast.LENGTH_LONG).show();
+            ///////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ1
+            String result;
+            CustomTask task=new CustomTask();
+            try {
+                result = task.execute(phoneNum).get();
+            }catch(Exception e){
 
+            }
+            /////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
         }
     }
 
@@ -196,7 +220,15 @@ public class MainActivity extends AppCompatActivity {
                             TelephonyManager telmanager=(TelephonyManager)getSystemService(TELEPHONY_SERVICE);
                             phoneNum= telmanager.getLine1Number();
                             phoneNum = phoneNum.replace("+82", "0");
-                            Toast.makeText(getApplicationContext(),phoneNum,Toast.LENGTH_LONG).show();
+                            //////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ2
+                            String result;
+                            CustomTask task=new CustomTask();
+                            try {
+                                result = task.execute(phoneNum).get();
+                            }catch(Exception e){
+
+                            }
+                            ////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
                         }
                     }
                     else{
@@ -275,5 +307,51 @@ public class MainActivity extends AppCompatActivity {
         return false;
 
     }
+    /////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ4
+    class CustomTask extends AsyncTask<String,Void,String> {
+        String sMsg,rMsg;
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                // StringBuffer sMsg=new StringBuffer();
+                URL url=new URL("http://192.168.0.2:8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");
+
+                OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
+                sMsg="upnum="+strings[0];
+            /*
+            PrintWriter pwr=new PrintWriter(osw);
+            sMsg.append("upnum").append(" = ").append(strings[0]);
+
+            pwr.write(sMsg.toString());
+            */
+                osw.write(sMsg);
+                osw.flush();
+                //jsp 통신 ok
+                if(conn.getResponseCode()==conn.HTTP_OK){
+                    InputStreamReader tmp=new InputStreamReader(conn.getInputStream(),"UTF-8");
+                    String str;
+                    BufferedReader reader=new BufferedReader(tmp);
+                    StringBuffer buffer=new StringBuffer();
+                    //jsp에서 보낸 값 받기
+                    while((str=reader.readLine())!=null){
+                        buffer.append(str);
+                    }
+                    rMsg=buffer.toString();
+                }
+                else{
+                    Log.i("통신결과",conn.getResponseCode()+"에러");
+
+                }
+            }
+            catch(MalformedURLException e){e.printStackTrace();}
+            catch(IOException e){e.printStackTrace();}
+            return rMsg;
+        }
+    }
+/////////////////////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
 
 }
