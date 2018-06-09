@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class theme extends AppCompatActivity {
     Button btn_mySelf;
@@ -68,6 +69,15 @@ public class theme extends AppCompatActivity {
                 toolbar.setBackgroundColor(getResources().getColor(R.color.Green));
             }
         });
+
+        Button reset=(Button)findViewById(R.id.reset);
+        reset.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                toolbar.setBackgroundColor(Color.rgb(93,181,164));
+            }
+        });
+
 
     }
 

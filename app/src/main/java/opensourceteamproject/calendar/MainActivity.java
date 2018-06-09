@@ -249,26 +249,34 @@ public class MainActivity extends AppCompatActivity {
 
         switch(item.getItemId()) {
 
-            case R.id.menu_bt1:
 
-                Intent intent1 =new Intent(getApplicationContext(),Group_List.class);
-                startActivity(intent1);
-                finish();
-                return true;
+                case R.id.menu_bt1:
 
-            case R.id.menu_bt3:
+                    Intent intent1 =new Intent(MainActivity.this,Group_List.class);
+                    startActivity(intent1);
+                    finish();
+                    return true;
 
-                Intent intent3 =new Intent(getApplicationContext(),theme.class);
-                startActivity(intent3);
-                finish();
-                return true;
+                case R.id.menu_bt2:
 
-            case R.id.menu_bt4:
+                    Intent intent2 =new Intent(MainActivity.this,view_group.class);
+                    startActivity(intent2);
+                    finish();
+                    return true;
 
-                Intent intent4 =new Intent(getApplicationContext(),setting.class);
-                startActivity(intent4);
-                finish();
-                return true;
+                case R.id.menu_bt3:
+
+                    Intent intent3 =new Intent(MainActivity.this,theme.class);
+                    startActivity(intent3);
+                    finish();
+                    return true;
+
+                case R.id.menu_bt4:
+
+                    Intent intent4 =new Intent(MainActivity.this,setting.class);
+                    startActivity(intent4);
+                    finish();
+                    return true;
 
         }
 
