@@ -61,7 +61,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
-
+    String ipchange="172.16.29.64";
     GridView monthView;
     Button btn_myGroup;
     Button btn_mySelf;
@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try{
                 // StringBuffer sMsg=new StringBuffer();
-                URL url=new URL("http://192.168.0.2:8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로
+                URL url=new URL("http://"+ipchange+":8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
                 conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");
