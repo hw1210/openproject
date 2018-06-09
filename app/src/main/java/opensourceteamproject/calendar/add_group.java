@@ -210,7 +210,7 @@ public class add_group extends AppCompatActivity {
         String sMsg,rMsg;
 
         @Override
-        protected String doInBackground(String... strings) {
+        protected String doInBackground(String... strings) {//빨간줄 떠서 막음
             /*try{
                 // StringBuffer sMsg=new StringBuffer();
                URL url=new URL("http://"+ipchange+":8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로
