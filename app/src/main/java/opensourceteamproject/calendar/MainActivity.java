@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest;
@@ -75,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         setTitle("Calendar");
 
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         monthText = (TextView) findViewById(R.id.monthText);
         setMonthText();
 
-        Button monthPrevious = (Button) findViewById(R.id.monthPrevious);
+        ImageButton monthPrevious = (ImageButton) findViewById(R.id.monthPrevious);
         monthPrevious.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 monthViewAdapter.setPreviousMonth();
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-         Button monthNext = (Button) findViewById(R.id.monthNext);
+        ImageButton monthNext = (ImageButton) findViewById(R.id.monthNext);
         monthNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 monthViewAdapter.setNextMonth();
@@ -284,33 +284,34 @@ public class MainActivity extends AppCompatActivity {
 
         switch(item.getItemId()) {
 
-            case R.id.menu_bt1:
 
-                Intent intent1 =new Intent(getApplicationContext(),Group_List.class);
-                startActivity(intent1);
-                finish();
-                return true;
+                case R.id.menu_bt1:
 
-            case R.id.menu_bt2:
+                    Intent intent1 =new Intent(MainActivity.this,Group_List.class);
+                    startActivity(intent1);
+                    finish();
+                    return true;
 
-                Intent intent2 =new Intent(getApplicationContext(),view_group.class);
-                startActivity(intent2);
-                finish();
-                return true;
+                case R.id.menu_bt2:
 
-            case R.id.menu_bt3:
+                    Intent intent2 =new Intent(MainActivity.this,view_group.class);
+                    startActivity(intent2);
+                    finish();
+                    return true;
 
-                Intent intent3 =new Intent(getApplicationContext(),theme.class);
-                startActivity(intent3);
-                finish();
-                return true;
+                case R.id.menu_bt3:
 
-            case R.id.menu_bt4:
+                    Intent intent3 =new Intent(MainActivity.this,theme.class);
+                    startActivity(intent3);
+                    finish();
+                    return true;
 
-                Intent intent4 =new Intent(getApplicationContext(),setting.class);
-                startActivity(intent4);
-                finish();
-                return true;
+                case R.id.menu_bt4:
+
+                    Intent intent4 =new Intent(MainActivity.this,setting.class);
+                    startActivity(intent4);
+                    finish();
+                    return true;
 
         }
 
@@ -324,7 +325,7 @@ class CustomTask extends AsyncTask<String,Void,String>{
     protected String doInBackground(String... strings) {
         try{
            // StringBuffer sMsg=new StringBuffer();
-            URL url=new URL("http://192.168.0.2:8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로
+            URL url=new URL("http://172.16.29.64:8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로//////////////////////////////////////////////////////////////////////////////////
             HttpURLConnection conn=(HttpURLConnection)url.openConnection();
             conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
             conn.setRequestMethod("POST");
