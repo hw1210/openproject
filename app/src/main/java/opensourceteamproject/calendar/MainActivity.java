@@ -61,7 +61,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
-    String ipchange="172.16.29.64";
+    String ipchange="192.168.0.2";
     GridView monthView;
     Button btn_myGroup;
     Button btn_mySelf;
