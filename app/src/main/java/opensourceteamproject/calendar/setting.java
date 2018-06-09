@@ -24,12 +24,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class setting extends AppCompatActivity {
+    String ipchange="172.16.29.64";
+
     Button btn_mySelf;
     Button btn_myGroup;
     Button btn_myHome;
-    String ipchange="172.16.29.64";
-    String name;
 
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,28 +48,12 @@ public class setting extends AppCompatActivity {
         btn_mySelf=(Button)findViewById(R.id.mySelf);
         btn_mySelf.setOnClickListener(btn_mySelfClickListener);
 
-        /*myPhone.getText();
-        myName.getText();
-
-        if(setting.isClickable()){//이름 변경 시
-            if(){//이름 설정 가능할 경우
-            myName.setText(이름~);
-            Toast.makeText(getApplicationContext(),"이름이 설정되었습니다.",Toast.LENGTH_SHORT).show();
-            };
-            else{//이름 설정 불가능한 경우(중복)
-                Toast.makeText(getApplicationContext(),"중복된 이름입니다.",Toast.LENGTH_SHORT).show();
-            }
-        }*/
-
         EditText myName=(EditText)findViewById(R.id.input_myName);
         Button setting=(Button)findViewById(R.id.myName_button);
 
         name=myName.getText().toString();
 
         setting.setOnClickListener(settingClickListener);
-
-
-
     }
 
     @Override
@@ -166,7 +151,7 @@ public class setting extends AppCompatActivity {
                 conn.setRequestMethod("POST");
 
                 OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
-                sMsg="upnum="+strings[0];
+                sMsg="name="+strings[0];
             /*
             PrintWriter pwr=new PrintWriter(osw);
             sMsg.append("upnum").append(" = ").append(strings[0]);

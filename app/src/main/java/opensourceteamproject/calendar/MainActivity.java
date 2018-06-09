@@ -307,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
 
     }
+
     /////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ4
     class CustomTask extends AsyncTask<String,Void,String> {
         String sMsg,rMsg;
@@ -315,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try{
                 // StringBuffer sMsg=new StringBuffer();
-                URL url=new URL("http://"+ipchange+":8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로
+                URL url=new URL("http://"+ipchange+":8084/dbconn/selectuserinfo.jsp"); //보낼 jsp 경로
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
                 conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");

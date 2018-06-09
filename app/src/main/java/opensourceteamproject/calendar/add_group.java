@@ -35,22 +35,21 @@ public class add_group extends AppCompatActivity {
     Button btn_myGroup;
     Button btn_myHome;
 
-    EditText groupName=(EditText)findViewById(R.id.input_group_name);
-    EditText memberNumber=(EditText)findViewById(R.id.input_member_number);
+    EditText memberNumber;
     String number;
 
-    ArrayList<String> members=new ArrayList<String>();
+    ArrayList<String> members=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_group);
 
-
         Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(Color.rgb(93,181,164));
         toolbar.setTitleTextColor(Color.WHITE);
+
         btn_myGroup=(Button)findViewById(R.id.myGroup);
         btn_myGroup.setOnClickListener(btn_myGroupClickListener);
         btn_myHome=(Button)findViewById(R.id.myHome);
@@ -69,22 +68,12 @@ public class add_group extends AppCompatActivity {
                 //String data=R.id.group_input_member.getText().toString();
                 showMessage();
                 members.add(number);
-
             }
         });
-        String result;
 
-        add_group.CustomTask task=new add_group.CustomTask();
-        try {
-            result = task.execute().get();
-        }catch(Exception e){
-
-        }
-
-        int i=0;
-        final String[] GroupData=null;
+        String[] GroupData={"null"};
         ListView GroupList=(ListView)findViewById(R.id.input_member_list);
-        ArrayAdapter<String> Adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,GroupData);
+        ArrayAdapter<String> Adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,GroupData);
         GroupList.setAdapter(Adapter);
 
         FloatingActionButton button1=(FloatingActionButton) findViewById(R.id.RegisterS);
@@ -120,19 +109,15 @@ public class add_group extends AppCompatActivity {
       builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
-
               String result;
 
               add_group.CustomTask task=new add_group.CustomTask();
               try {
-
                   for(String s: members)
                   result = task.execute(s).get();
               }catch(Exception e){
 
               }
-
-
           }
       });
       builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
@@ -220,7 +205,7 @@ public class add_group extends AppCompatActivity {
                 conn.setRequestMethod("POST");
 
                 OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
-                sMsg="upnum="+strings[0];
+                sMsg="members="+strings[0];
             /*
             PrintWriter pwr=new PrintWriter(osw);
             sMsg.append("upnum").append(" = ").append(strings[0]);
