@@ -48,6 +48,10 @@
     <string name="조회">조회</string>
     <string name="그룹멤버">그룹 멤버</string>
     <string name="사용자">사용자</string>
+    <!--설정-->
+    <string name="계정">계정</string>
+    <string name="이름설정">이름 설정</string>
+    <string name="이름입력"></string>
     <!--그외-->
     <string name="sample">sample</string>
     <string name="title_activity_settings">Settings</string>

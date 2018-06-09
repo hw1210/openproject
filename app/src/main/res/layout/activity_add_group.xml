@@ -143,8 +143,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingStart="15dp"
+                android:paddingEnd="2dp"
                 android:paddingTop="10dp"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:background="#89C7B6"
                 android:text="@string/사용자" />
 
