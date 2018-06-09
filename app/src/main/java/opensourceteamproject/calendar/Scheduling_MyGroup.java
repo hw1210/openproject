@@ -35,7 +35,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class Scheduling_MyGroup extends AppCompatActivity {
-    String ipchange="172.16.29.64";
+ //   String ipchange="172.16.29.64";
+ String ipchange="192.168..0.2";
     FloatingActionButton btn_RegisterS,btn_CancelS;
 
     Switch btn_dDay,btn_allDay;

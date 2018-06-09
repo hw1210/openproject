@@ -32,7 +32,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Scheduling_MySelf extends AppCompatActivity {
-    String ipchange="172.16.29.64";
+  //  String ipchange="172.16.29.64";
+  String ipchange="192.168..0.2";
     FloatingActionButton btn_RegisterS,btn_CancelS;
 
     Switch btn_dDay,btn_allDay;

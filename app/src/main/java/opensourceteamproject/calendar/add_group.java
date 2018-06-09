@@ -30,7 +30,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class add_group extends AppCompatActivity {
-    String ipchange="172.16.29.64";
+//    String ipchange="172.16.29.64";
+    String ipchange="192.168.0.2";
     Button btn_mySelf;
     Button btn_myGroup;
     Button btn_myHome;
@@ -60,14 +61,21 @@ public class add_group extends AppCompatActivity {
         Button button=(Button) findViewById(R.id.group_member_button); //번호 조회하여 추가
 
         memberNumber=(EditText)findViewById(R.id.input_member_number);
-        number=memberNumber.getText().toString();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //String data=R.id.group_input_member.getText().toString();
-                showMessage();
-                members.add(number);
+              //폰번호로 사용자 조회
+              String result="";
+              add_group.CustomTask task=new add_group.CustomTask();
+              try {
+                  number=memberNumber.getText().toString();
+                  result = task.execute(number).get();
+              }catch(Exception e){
+
+              }
+                showMessage(result);
             }
         });
 
@@ -101,16 +109,19 @@ public class add_group extends AppCompatActivity {
         });
     }
 
-    private void showMessage(){
-      AlertDialog.Builder builder=new AlertDialog.Builder(this);
-      builder.setTitle("멤버 추가");
-      builder.setMessage("ㅇㅇㅇ을(를) 추가하시겠습니까?");
-
-      builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+    private void showMessage(String result){
+      if(result!=""){
+          AlertDialog.Builder builder=new AlertDialog.Builder(this);
+          builder.setTitle("멤버 추가");
+          builder.setMessage(result+" 을(를) 추가하시겠습니까?");
+          builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
-              String result;
 
+              members.add(number);
+              memberNumber.setText(null);
+              /*
+              String result;
               add_group.CustomTask task=new add_group.CustomTask();
               try {
                   for(String s: members)
@@ -118,16 +129,20 @@ public class add_group extends AppCompatActivity {
               }catch(Exception e){
 
               }
+              */                                                                  //////////////////////////////추가하겠습니까?예
           }
       });
       builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
-
+              dialog.cancel();
+              memberNumber.setText(null);
           }
       });
-      AlertDialog dialog=builder.create();
-      dialog.show();
+      AlertDialog alertDialog=builder.create();
+      alertDialog.show();
+      }
+      else memberNumber.setText(null);
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -205,7 +220,8 @@ public class add_group extends AppCompatActivity {
                 conn.setRequestMethod("POST");
 
                 OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
-                sMsg="members="+strings[0];
+           sMsg="upnum="+strings[0];
+                //     sMsg="members="+strings[0];
             /*
             PrintWriter pwr=new PrintWriter(osw);
             sMsg.append("upnum").append(" = ").append(strings[0]);
@@ -218,13 +234,17 @@ public class add_group extends AppCompatActivity {
                 if(conn.getResponseCode()==conn.HTTP_OK){
                     InputStreamReader tmp=new InputStreamReader(conn.getInputStream(),"UTF-8");
                     String str;
+                    int flag=10;
                     BufferedReader reader=new BufferedReader(tmp);
                     StringBuffer buffer=new StringBuffer();
                     //jsp에서 보낸 값 받기
                     while((str=reader.readLine())!=null){
                         buffer.append(str);
+                        flag=5;
                     }
-                    rMsg=buffer.toString();
+                    if(flag==5)rMsg=buffer.toString();
+                    else rMsg="";
+
                 }
                 else{
                     Log.i("통신결과",conn.getResponseCode()+"에러");
