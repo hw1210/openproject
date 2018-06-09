@@ -3,11 +3,13 @@ package opensourceteamproject.calendar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +20,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
 public class add_group extends AppCompatActivity {
     Button btn_mySelf;
     Button btn_myGroup;
@@ -25,6 +36,9 @@ public class add_group extends AppCompatActivity {
 
     EditText groupName=(EditText)findViewById(R.id.input_group_name);
     EditText memberNumber=(EditText)findViewById(R.id.input_member_number);
+    String number;
+
+    ArrayList<String> members=new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +59,26 @@ public class add_group extends AppCompatActivity {
 
         Button button=(Button) findViewById(R.id.group_member_button); //번호 조회하여 추가
 
+        memberNumber=(EditText)findViewById(R.id.input_member_number);
+        number=memberNumber.getText().toString();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //String data=R.id.group_input_member.getText().toString();
                 showMessage();
+                members.add(number);
+
             }
         });
+        String result;
+
+        add_group.CustomTask task=new add_group.CustomTask();
+        try {
+            result = task.execute().get();
+        }catch(Exception e){
+
+        }
 
         int i=0;
         final String[] GroupData=null;
@@ -92,6 +119,18 @@ public class add_group extends AppCompatActivity {
       builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
+
+              String result;
+
+              add_group.CustomTask task=new add_group.CustomTask();
+              try {
+
+                  for(String s: members)
+                  result = task.execute(s).get();
+              }catch(Exception e){
+
+              }
+
 
           }
       });
@@ -167,5 +206,49 @@ public class add_group extends AppCompatActivity {
             finish();
         }
     };
+    class CustomTask extends AsyncTask<String,Void,String> {
+        String sMsg,rMsg;
+
+        @Override
+        protected String doInBackground(String... strings) {
+            /*try{
+                // StringBuffer sMsg=new StringBuffer();
+               URL url=new URL("http://"+ipchange+":8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");
+
+                OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
+                sMsg="upnum="+strings[0];
+            /*
+            PrintWriter pwr=new PrintWriter(osw);
+            sMsg.append("upnum").append(" = ").append(strings[0]);
+
+            pwr.write(sMsg.toString());
+            */
+                /*osw.write(sMsg);
+                osw.flush();
+                //jsp 통신 ok
+                if(conn.getResponseCode()==conn.HTTP_OK){
+                    InputStreamReader tmp=new InputStreamReader(conn.getInputStream(),"UTF-8");
+                    String str;
+                    BufferedReader reader=new BufferedReader(tmp);
+                    StringBuffer buffer=new StringBuffer();
+                    //jsp에서 보낸 값 받기
+                    while((str=reader.readLine())!=null){
+                        buffer.append(str);
+                    }
+                    rMsg=buffer.toString();
+                }
+                else{
+                    Log.i("통신결과",conn.getResponseCode()+"에러");
+
+                }
+            }
+            catch(MalformedURLException e){e.printStackTrace();}
+            catch(IOException e){e.printStackTrace();}
+            return rMsg;
+        }*/
+    }
 
 }

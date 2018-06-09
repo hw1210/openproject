@@ -20,6 +20,7 @@ public class MySelfActivity extends AppCompatActivity{
     FloatingActionButton btn_MakeS;
     Button btn_myHome;
 
+
     Data data_container;
     ArrayList<Data> instanceList = new ArrayList<>();
     DataAdapter_MySelf dataAdapter;
