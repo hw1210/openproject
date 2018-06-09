@@ -14,6 +14,7 @@
     <string name="그룹일정보기">그룹 일정 보기</string>
     <string name="새로운일정">새로운 일정 생성</string>
     <string name="새로운그룹">새로운 그룹 생성</string>
+    <string name="그룹표시설정">그룹 표시 설정</string>
     <!-- 일정 생성 -->
     <string name="디데이">디데이</string>
     <string name="일정입력">일정을 입력하세요.</string>
@@ -51,7 +52,7 @@
     <!--설정-->
     <string name="계정">계정</string>
     <string name="이름설정">이름 설정</string>
-    <string name="이름입력"></string>
+    <string name="이름입력">이름을 입력하세요.</string>
     <!--그외-->
     <string name="sample">sample</string>
     <string name="title_activity_settings">Settings</string>

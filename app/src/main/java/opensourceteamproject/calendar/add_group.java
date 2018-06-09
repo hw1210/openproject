@@ -120,13 +120,6 @@ public class add_group extends AppCompatActivity {
                 finish();
                 return true;
 
-            case R.id.menu_bt2:
-
-                Intent intent2 =new Intent(getApplicationContext(),view_group.class);
-                startActivity(intent2);
-                finish();
-                return true;
-
             case R.id.menu_bt3:
 
                 Intent intent3 =new Intent(getApplicationContext(),theme.class);

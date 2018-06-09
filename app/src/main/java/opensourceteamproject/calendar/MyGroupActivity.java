@@ -26,6 +26,7 @@ public class MyGroupActivity extends AppCompatActivity {
     ArrayList<Data> instanceList1 = new ArrayList<>();
     ArrayList<Data_Group> instance = new ArrayList<>();
     Data data_container1,data_container2,data_container3;
+    Data data_container[];
     Data_Group data_container0,data_container00;
     DataAdapter_MyGroup dataAdapter;
     ExpandableListView listView;
@@ -54,6 +55,9 @@ public class MyGroupActivity extends AppCompatActivity {
     }
 
     public void initListView() {
+        /*for(int i=0;;i++){
+            data_container[i]=new Data();
+        }*/
         data_container1=new Data("D-10","오픈소스","2018/06/11");
         data_container2=new Data("D-100","데베","2018/06/11");
         data_container3=new Data("D-1000","가나다라마바사아자차카타파하","2018/06/11");
@@ -84,13 +88,6 @@ public class MyGroupActivity extends AppCompatActivity {
 
                 Intent intent1 =new Intent(getApplicationContext(),Group_List.class);
                 startActivity(intent1);
-                finish();
-                return true;
-
-            case R.id.menu_bt2:
-
-                Intent intent2 =new Intent(getApplicationContext(),view_group.class);
-                startActivity(intent2);
                 finish();
                 return true;
 

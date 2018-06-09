@@ -31,8 +31,6 @@
             android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".Group_List"
             android:windowSoftInputMode="adjustNothing"/>
-        <activity android:name=".view_group"
-            android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".theme"
             android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".SchedulingActivity"

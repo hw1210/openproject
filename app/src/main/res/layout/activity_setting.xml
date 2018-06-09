@@ -77,7 +77,7 @@
                 android:id="@+id/phone_text"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="@string/설정" />
+                android:text="@string/계정" />
 
             <EditText
                 android:id="@+id/input_phone"
@@ -87,7 +87,9 @@
                 android:singleLine="true"
                 android:textSize="15sp"
                 android:ems="10"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:hint="@string/sample">
+            </EditText>
         </LinearLayout>
 
         <LinearLayout
@@ -100,7 +102,6 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="@string/이름설정" />
-
 
             <EditText
                 android:id="@+id/input_myName"

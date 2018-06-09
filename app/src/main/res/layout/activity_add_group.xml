@@ -61,7 +61,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/add"
+        android:id="@+id/make_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -71,13 +71,11 @@
         app:layout_constraintTop_toBottomOf="@+id/Title">
 
         <LinearLayout
-            android:id="@+id/group_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/group_name_text"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="@string/그룹명" />
@@ -96,26 +94,24 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/group_member"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/group_member_text"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="@string/번호" />
 
             <EditText
-                android:id="@+id/group_input_member"
+                android:id="@+id/input_member_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:singleLine="true"
                 android:textSize="15sp"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="phone"
                 android:hint="@string/번호입력" />
 
             <Button
@@ -126,28 +122,25 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/member"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/member_name"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="@string/그룹멤버" />
 
-            <TextView
-                android:id="@+id/name"
+            <ListView
+                android:id="@+id/input_member_list"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingStart="15dp"
                 android:paddingEnd="2dp"
                 android:paddingTop="10dp"
-                android:textSize="20sp"
-                android:background="#89C7B6"
-                android:text="@string/사용자" />
+                android:textSize="20sp" />
 
         </LinearLayout>
     </LinearLayout>
@@ -164,15 +157,15 @@
         app:srcCompat="@drawable/ic_action_cancle" />
 
     <android.support.design.widget.FloatingActionButton
-                android:id="@+id/RegisterS"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="17dp"
-                android:layout_marginEnd="17dp"
-                app:backgroundTint="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_action_puls" />
+        android:id="@+id/RegisterS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="17dp"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_action_puls" />
 
 
 
