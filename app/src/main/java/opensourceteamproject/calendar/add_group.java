@@ -110,7 +110,7 @@ public class add_group extends AppCompatActivity {
     }
 
     private void showMessage(String result){
-      if(result!=""){
+      if(!result.isEmpty()){
           AlertDialog.Builder builder=new AlertDialog.Builder(this);
           builder.setTitle("멤버 추가");
           builder.setMessage(result+" 을(를) 추가하시겠습니까?");
