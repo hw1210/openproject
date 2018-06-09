@@ -30,6 +30,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class add_group extends AppCompatActivity {
+    String ipchange="172.16.29.64";
     Button btn_mySelf;
     Button btn_myGroup;
     Button btn_myHome;
@@ -211,9 +212,9 @@ public class add_group extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {//빨간줄 떠서 막음
-            /*try{
+            try{
                 // StringBuffer sMsg=new StringBuffer();
-               URL url=new URL("http://"+ipchange+":8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로
+                URL url=new URL("http://"+ipchange+":8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
                 conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");
@@ -226,7 +227,7 @@ public class add_group extends AppCompatActivity {
 
             pwr.write(sMsg.toString());
             */
-                /*osw.write(sMsg);
+                osw.write(sMsg);
                 osw.flush();
                 //jsp 통신 ok
                 if(conn.getResponseCode()==conn.HTTP_OK){
@@ -248,7 +249,7 @@ public class add_group extends AppCompatActivity {
             catch(MalformedURLException e){e.printStackTrace();}
             catch(IOException e){e.printStackTrace();}
             return rMsg;
-        }*/
+        }
     }
 
 }
