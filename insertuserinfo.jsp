@@ -23,7 +23,7 @@ try{
 	pstmt.setString(1,upnum);
 	//pstmt.setString(2,upnum);
 	pstmt.execute();
-	out.print("성공");
+
 }
 catch(Exception e){
 	e.printStackTrace();

@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     int curMonth;
     private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE=1000;
 
+    String phoneNum;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(Color.rgb(93,181,164));
         toolbar.setTitleTextColor(Color.WHITE);
 
-
+        phoneNum=null;
         monthView = (GridView) findViewById(R.id.monthView);
         monthViewAdapter = new MonthAdapter(this);
         monthView.setAdapter(monthViewAdapter);
@@ -131,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
         });
         /*전화번호 접근 권한 허가 여부 및 작업*/
 
-        String phoneNum=null;
         //if : version check
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             int permissionResult=checkSelfPermission(Manifest.permission.READ_PHONE_STATE);
@@ -256,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener btn_myGroupClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MyGroupActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -263,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener MakeSClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),SchedulingActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -271,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener btn_mySelfClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MySelfActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -284,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.menu_bt1:
 
                     Intent intent1 =new Intent(MainActivity.this,Group_List.class);
+                    intent1.putExtra("phoneNum",phoneNum);
                     startActivity(intent1);
                     finish();
                     return true;
@@ -291,13 +295,16 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.menu_bt3:
 
                     Intent intent3 =new Intent(MainActivity.this,theme.class);
-                    startActivity(intent3);
+                    intent3.putExtra("phoneNum",phoneNum);
+                   Toast.makeText(getApplicationContext(),phoneNum,Toast.LENGTH_LONG).show();
+                   startActivity(intent3);
                     finish();
                     return true;
 
                 case R.id.menu_bt4:
 
                     Intent intent4 =new Intent(MainActivity.this,setting.class);
+                    intent4.putExtra("phoneNum",phoneNum);
                     startActivity(intent4);
                     finish();
                     return true;

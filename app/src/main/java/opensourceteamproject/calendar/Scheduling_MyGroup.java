@@ -39,6 +39,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
  String ipchange="192.168..0.2";
     FloatingActionButton btn_RegisterS,btn_CancelS;
 
+    String phoneNum="";
     Switch btn_dDay,btn_allDay;
     TimePicker btn_startTime,btn_endTime;
     DatePicker btn_date;
@@ -63,6 +64,8 @@ public class Scheduling_MyGroup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scheduling);
 
+        Intent rintent=new Intent(this.getIntent());
+      phoneNum=rintent.getStringExtra("phoneNum");
         Toolbar toolbar=(Toolbar)findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(Color.rgb(93,181,164));
@@ -142,6 +145,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
             case R.id.menu_bt1:
 
                 Intent intent1 =new Intent(getApplicationContext(),Group_List.class);
+                intent1.putExtra("phoneNum",phoneNum);
                 startActivity(intent1);
                 finish();
                 return true;
@@ -149,6 +153,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
             case R.id.menu_bt3:
 
                 Intent intent3 =new Intent(getApplicationContext(),theme.class);
+                intent3.putExtra("phoneNum",phoneNum);
                 startActivity(intent3);
                 finish();
                 return true;
@@ -156,6 +161,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
             case R.id.menu_bt4:
 
                 Intent intent4 =new Intent(getApplicationContext(),setting.class);
+                intent4.putExtra("phoneNum",phoneNum);
                 startActivity(intent4);
                 finish();
                 return true;
@@ -168,6 +174,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
     View.OnClickListener btn_myHomeClickListener=new View.OnClickListener() {
         public void onClick(View v) {
             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -176,6 +183,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
     View.OnClickListener btn_myGroupClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MyGroupActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -184,6 +192,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
     View.OnClickListener btn_mySelfClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MySelfActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -201,6 +210,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
             }
             Toast.makeText(getApplicationContext(),"새로운 일정이 생성되었습니다.",Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(getApplicationContext(),MyGroupActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -209,6 +219,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
         public void onClick(View v){
             Toast.makeText(getApplicationContext(),"취소되었습니다.",Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(getApplicationContext(),Scheduling_MyGroup.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -218,6 +229,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
         public void onClick(View v){
             Toast.makeText(getApplicationContext(),"일반 일정 생성",Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(getApplicationContext(),SchedulingActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -226,6 +238,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
         public void onClick(View v){
             Toast.makeText(getApplicationContext(),"개인 일정 생성",Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(getApplicationContext(),Scheduling_MySelf.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }

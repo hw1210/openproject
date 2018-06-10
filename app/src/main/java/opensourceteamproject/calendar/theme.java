@@ -17,11 +17,14 @@ public class theme extends AppCompatActivity {
     Button btn_mySelf;
     Button btn_myGroup;
     Button btn_myHome;
-
+    String phoneNum="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme);
+
+        Intent rintent=new Intent(this.getIntent());
+        phoneNum=rintent.getStringExtra("phoneNum");
 
         final Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
@@ -94,6 +97,7 @@ public class theme extends AppCompatActivity {
     View.OnClickListener MakeSClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),SchedulingActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
         }
     };
@@ -106,6 +110,7 @@ public class theme extends AppCompatActivity {
             case R.id.menu_bt1:
 
                 Intent intent1 =new Intent(getApplicationContext(),Group_List.class);
+                intent1.putExtra("phoneNum",phoneNum);
                 startActivity(intent1);
                 finish();
                 return true;
@@ -113,6 +118,7 @@ public class theme extends AppCompatActivity {
             case R.id.menu_bt3:
 
                 Intent intent3 =new Intent(getApplicationContext(),theme.class);
+                intent3.putExtra("phoneNum",phoneNum);
                 startActivity(intent3);
                 finish();
                 return true;
@@ -120,6 +126,7 @@ public class theme extends AppCompatActivity {
             case R.id.menu_bt4:
 
                 Intent intent4 =new Intent(getApplicationContext(),setting.class);
+                intent4.putExtra("phoneNum",phoneNum);
                 startActivity(intent4);
                 finish();
                 return true;
@@ -133,6 +140,7 @@ public class theme extends AppCompatActivity {
     View.OnClickListener btn_myHomeClickListener=new View.OnClickListener() {
         public void onClick(View v) {
             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -141,6 +149,7 @@ public class theme extends AppCompatActivity {
     View.OnClickListener btn_myGroupClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MyGroupActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -149,6 +158,7 @@ public class theme extends AppCompatActivity {
     View.OnClickListener btn_mySelfClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MySelfActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }

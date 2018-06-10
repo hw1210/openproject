@@ -22,6 +22,7 @@ public class MyGroupActivity extends AppCompatActivity {
     Button btn_myHome;
     ToggleButton btn_calendar;
 
+    String phoneNum="";
     Data data_container;
     ArrayList<Data> instanceList=new ArrayList<Data>();;
     Data_Group GroupData;
@@ -33,6 +34,8 @@ public class MyGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mygroup);
+        Intent rintent=new Intent(this.getIntent());
+        phoneNum=rintent.getStringExtra("phoneNum");
 
         Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
@@ -88,6 +91,7 @@ public class MyGroupActivity extends AppCompatActivity {
             case R.id.menu_bt1:
 
                 Intent intent1 =new Intent(getApplicationContext(),Group_List.class);
+                intent1.putExtra("phoneNum",phoneNum);
                 startActivity(intent1);
                 finish();
                 return true;
@@ -95,6 +99,7 @@ public class MyGroupActivity extends AppCompatActivity {
             case R.id.menu_bt3:
 
                 Intent intent3 =new Intent(getApplicationContext(),theme.class);
+                intent3.putExtra("phoneNum",phoneNum);
                 startActivity(intent3);
                 finish();
                 return true;
@@ -102,6 +107,7 @@ public class MyGroupActivity extends AppCompatActivity {
             case R.id.menu_bt4:
 
                 Intent intent4 =new Intent(getApplicationContext(),setting.class);
+                intent4.putExtra("phoneNum",phoneNum);
                 startActivity(intent4);
                 finish();
                 return true;
@@ -114,6 +120,7 @@ public class MyGroupActivity extends AppCompatActivity {
     View.OnClickListener btn_myHomeClickListener=new View.OnClickListener() {
         public void onClick(View v) {
             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -121,6 +128,7 @@ public class MyGroupActivity extends AppCompatActivity {
     View.OnClickListener btn_mySelfClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MySelfActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -128,6 +136,7 @@ public class MyGroupActivity extends AppCompatActivity {
     View.OnClickListener MakeSClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),Scheduling_MyGroup.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
