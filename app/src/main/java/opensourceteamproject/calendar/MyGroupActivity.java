@@ -2,18 +2,29 @@ package opensourceteamproject.calendar;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class MyGroupActivity extends AppCompatActivity {
@@ -21,6 +32,8 @@ public class MyGroupActivity extends AppCompatActivity {
     FloatingActionButton btn_MakeS;
     Button btn_myHome;
     ToggleButton btn_calendar;
+    //   String ipchange="172.16.29.64";
+    String ipchange="192.168.0.2";
 
     String phoneNum="";
     Data data_container;
@@ -29,14 +42,22 @@ public class MyGroupActivity extends AppCompatActivity {
     ArrayList<Data_Group> instance;
     DataAdapter_MyGroup dataAdapter;
     ExpandableListView listView;
-
+    String[] giddata;
+    ArrayList<String> GroupDatatemp;
+    //String[] ttname;
+    //String[] ttdate;
+    //String[] ttline;
+    //String[] ttdday;
+    ArrayList<String[]> tdatelist;
+    ArrayList<String[]> tnamelist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mygroup);
         Intent rintent=new Intent(this.getIntent());
         phoneNum=rintent.getStringExtra("phoneNum");
-
+        tdatelist=new ArrayList<String[]>();
+        tnamelist=new ArrayList<String[]>();
         Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(Color.rgb(93,181,164));
@@ -56,6 +77,78 @@ public class MyGroupActivity extends AppCompatActivity {
     }
 
     public void initListView() {
+
+        GroupDatatemp=new ArrayList<>();
+
+        /*ArrayAdapter<String> adapter_group=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,GroupData);
+        btn_group.setPrompt("");
+        btn_group.setAdapter(adapter_group);
+        btn_group.setOnItemSelectedListener(groupSelectedListener);
+*/
+        ///////////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
+        String result2;
+
+        MyGroupActivity.CustomTask2 task2=new MyGroupActivity.CustomTask2();
+        try {
+
+            result2 = task2.execute(phoneNum).get();
+            Toast.makeText(getApplicationContext(), "**" + result2, Toast.LENGTH_LONG).show();
+            giddata = result2.split("/");
+
+            String result3;
+            String sam = "";
+            for (int i = 0; i < giddata.length; i++) {
+
+                MyGroupActivity.CustomTask3 task3 = new MyGroupActivity.CustomTask3();
+                try {
+                    result3 = task3.execute(giddata[i].toString()).get();
+                    GroupDatatemp.add(result3.toString());
+            Toast.makeText(getApplicationContext(),result3.toString(),Toast.LENGTH_LONG).show();
+
+
+                } catch (Exception e) {
+
+                }
+            }
+        }catch(Exception e){
+
+        }
+        String result;
+        for (int j = 0; j < giddata.length; j++) {
+            String[] ttname;
+            String[] ttdate;
+            String[] ttline;
+            String[] ttdday;
+            MyGroupActivity.CustomTask task = new MyGroupActivity.CustomTask();
+            try {
+                result = task.execute(giddata[j].toString()).get();
+                Toast.makeText(getApplicationContext(), "r+"+result.toString(), Toast.LENGTH_LONG).show();
+                if(!result.isEmpty()) {
+                    ttline = result.split("&");
+                    String a = "";
+                    String b = "";
+                    for (int i = 0; i < ttline.length; i++) {
+                        if (i % 2 == 0) a = ttline[i].toString() + "/";
+                        else b = ttline[i].toString() + "/";
+                    }
+                    ttname = a.split("/");
+                   tnamelist.add(ttname);
+                    ttdate = b.split("/");
+                    tdatelist.add(ttdate);
+               }
+            } catch (Exception e) {
+
+            }
+////////////////name:에 번갈아토스트//////////////////////////////////////////////////////////홀수일때는 name 짝수일때는 date출력
+        }
+        for(int i=0;i<tnamelist.size();i++){
+            for(int j=0;j<tnamelist.get(i).length;j++){
+                Toast.makeText(getApplicationContext(),"name:"+(tnamelist.get(i))[j].toString(), Toast.LENGTH_LONG).show();
+           //    Toast.makeText(getApplicationContext(),"date:"+(tdatelist.get(i))[j].toString(), Toast.LENGTH_LONG).show();
+            }
+            Toast.makeText(getApplicationContext(),"next",Toast.LENGTH_LONG).show();
+        }
+
         /*data_container=new Data("D-10","오픈소스","2018/06/11");
         instanceList.add(data_container);*/
 
@@ -141,4 +234,145 @@ public class MyGroupActivity extends AppCompatActivity {
             finish();
         }
     };
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////
+    class CustomTask extends AsyncTask<String,Void,String> {
+        String sMsg,rMsg;
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                // StringBuffer sMsg=new StringBuffer();
+                URL url=new URL("http://"+ipchange+":8084/dbconn/searchmygrouptodo.jsp"); //보낼 jsp 경로
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");
+
+                OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
+                sMsg="gid="+strings[0];
+            /*PrintWriter pwr=new PrintWriter(osw);
+            sMsg.append("upnum").append(" = ").append(strings[0]);
+
+            pwr.write(sMsg.toString());
+            */
+                osw.write(sMsg);
+                osw.flush();
+                //jsp 통신 ok
+                if(conn.getResponseCode()==conn.HTTP_OK){
+                    InputStreamReader tmp=new InputStreamReader(conn.getInputStream(),"UTF-8");
+                    String str;
+                    BufferedReader reader=new BufferedReader(tmp);
+                    StringBuffer buffer=new StringBuffer();
+                    //jsp에서 보낸 값 받기
+                    while((str=reader.readLine())!=null){
+                        buffer.append(str);
+                    }
+                    rMsg=buffer.toString();
+                }
+                else{
+                    Log.i("통신결과",conn.getResponseCode()+"에러");
+
+                }
+            }
+            catch(MalformedURLException e){e.printStackTrace();}
+            catch(IOException e){e.printStackTrace();}
+            return rMsg;
+        }
+    }
+
+    class CustomTask2 extends AsyncTask<String,Void,String> {
+        String sMsg,rMsg;
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                // StringBuffer sMsg=new StringBuffer();
+                URL url=new URL("http://"+ipchange+":8084/dbconn/selectgroupinfo.jsp"); //보낼 jsp 경로
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");
+
+                OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
+                sMsg="upnum="+strings[0];
+                /*
+            PrintWriter pwr=new PrintWriter(osw);
+            sMsg.append("upnum").append(" = ").append(strings[0]);
+
+            pwr.write(sMsg.toString());
+            */
+                osw.write(sMsg);
+                osw.flush();
+                //jsp 통신 ok
+                if(conn.getResponseCode()==conn.HTTP_OK){
+                    InputStreamReader tmp=new InputStreamReader(conn.getInputStream(),"UTF-8");
+                    String str;
+                    BufferedReader reader=new BufferedReader(tmp);
+                    StringBuffer buffer=new StringBuffer();
+                    //jsp에서 보낸 값 받기
+                    while((str=reader.readLine())!=null){
+                        buffer.append(str);
+                    }
+                    rMsg=buffer.toString();
+                }
+                else{
+                    Log.i("통신결과",conn.getResponseCode()+"에러");
+
+                }
+            }
+            catch(MalformedURLException e){e.printStackTrace();}
+            catch(IOException e){e.printStackTrace();}
+            return rMsg;
+        }
+    }
+
+
+    class CustomTask3 extends AsyncTask<String,Void,String> {
+        String sMsg,rMsg;
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                // StringBuffer sMsg=new StringBuffer();
+                URL url=new URL("http://"+ipchange+":8084/dbconn/selectmygrouplist.jsp"); //보낼 jsp 경로
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");
+
+                OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
+                sMsg="gid="+strings[0];
+                /*
+            PrintWriter pwr=new PrintWriter(osw);
+            sMsg.append("upnum").append(" = ").append(strings[0]);
+
+            pwr.write(sMsg.toString());
+            */
+                osw.write(sMsg);
+                osw.flush();
+                //jsp 통신 ok
+                if(conn.getResponseCode()==conn.HTTP_OK){
+                    InputStreamReader tmp=new InputStreamReader(conn.getInputStream(),"UTF-8");
+                    String str;
+                    BufferedReader reader=new BufferedReader(tmp);
+                    StringBuffer buffer=new StringBuffer();
+                    //jsp에서 보낸 값 받기
+                    while((str=reader.readLine())!=null){
+                        buffer.append(str);
+                    }
+                    rMsg=buffer.toString();
+                }
+                else{
+                    Log.i("통신결과",conn.getResponseCode()+"에러");
+
+                }
+            }
+            catch(MalformedURLException e){e.printStackTrace();}
+            catch(IOException e){e.printStackTrace();}
+            return rMsg;
+        }
+    }
+
+
+
 }
+
