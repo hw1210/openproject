@@ -2,16 +2,19 @@ package opensourceteamproject.calendar;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A {@link android.preference.PreferenceActivity} which implements and proxies the necessary calls
@@ -21,12 +24,61 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
 
     private AppCompatDelegate mDelegate;
 
+    final Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //세로 고정
         super.onCreate(savedInstanceState);
+
+        FloatingActionButton button=(FloatingActionButton) findViewById(R.id.redButton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                toolbar.setBackgroundColor((Color.rgb(233,191,120)));
+            }
+        });
+
+
+        button=(FloatingActionButton) findViewById(R.id.blueButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar.setBackgroundColor(getResources().getColor(R.color.Blue));
+
+            }
+        });
+
+        button=(FloatingActionButton) findViewById(R.id.blackButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbar.setBackgroundColor(getResources().getColor(R.color.Black));
+            }
+        });
+
+        button=(FloatingActionButton) findViewById(R.id.greenButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                toolbar.setBackgroundColor(getResources().getColor(R.color.Green));
+
+            }
+        });
+
+        Button reset=(Button)findViewById(R.id.reset);
+        reset.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                toolbar.setBackgroundColor(Color.rgb(93,181,164));
+
+            }
+        });
+
     }
 
     @Override

@@ -18,6 +18,7 @@ public class theme extends AppCompatActivity {
     Button btn_myGroup;
     Button btn_myHome;
     String phoneNum="";
+    String a="original";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class theme extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 toolbar.setBackgroundColor((Color.rgb(233,191,120)));
-
+                a="Red";
             }
         });
 
@@ -53,6 +54,7 @@ public class theme extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 toolbar.setBackgroundColor(getResources().getColor(R.color.Blue));
+                a="Blue";
             }
         });
 
@@ -61,6 +63,7 @@ public class theme extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 toolbar.setBackgroundColor(getResources().getColor(R.color.Black));
+                a="Black";
             }
         });
 
@@ -70,6 +73,7 @@ public class theme extends AppCompatActivity {
             public void onClick(View v) {
 
                 toolbar.setBackgroundColor(getResources().getColor(R.color.Green));
+                a="Green";
             }
         });
 
@@ -78,7 +82,8 @@ public class theme extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 toolbar.setBackgroundColor(Color.rgb(93,181,164));
-            }
+                a="Original";
+                            }
         });
 
 
@@ -98,6 +103,7 @@ public class theme extends AppCompatActivity {
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),SchedulingActivity.class);
             intent.putExtra("phoneNum",phoneNum);
+            intent.putExtra("a",a);
             startActivity(intent);
         }
     };
@@ -111,6 +117,7 @@ public class theme extends AppCompatActivity {
 
                 Intent intent1 =new Intent(getApplicationContext(),Group_List.class);
                 intent1.putExtra("phoneNum",phoneNum);
+                intent1.putExtra("a",a);
                 startActivity(intent1);
                 finish();
                 return true;
@@ -119,6 +126,7 @@ public class theme extends AppCompatActivity {
 
                 Intent intent3 =new Intent(getApplicationContext(),theme.class);
                 intent3.putExtra("phoneNum",phoneNum);
+                intent3.putExtra("a",a);
                 startActivity(intent3);
                 finish();
                 return true;
@@ -127,6 +135,7 @@ public class theme extends AppCompatActivity {
 
                 Intent intent4 =new Intent(getApplicationContext(),setting.class);
                 intent4.putExtra("phoneNum",phoneNum);
+                intent4.putExtra("a",a);
                 startActivity(intent4);
                 finish();
                 return true;
@@ -141,6 +150,7 @@ public class theme extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
             intent.putExtra("phoneNum",phoneNum);
+            intent.putExtra("a",a);
             startActivity(intent);
             finish();
         }
@@ -150,6 +160,7 @@ public class theme extends AppCompatActivity {
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MyGroupActivity.class);
             intent.putExtra("phoneNum",phoneNum);
+            intent.putExtra("a",a);
             startActivity(intent);
             finish();
         }
@@ -159,6 +170,7 @@ public class theme extends AppCompatActivity {
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MySelfActivity.class);
             intent.putExtra("phoneNum",phoneNum);
+            intent.putExtra("a",a);
             startActivity(intent);
             finish();
         }
