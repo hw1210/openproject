@@ -39,12 +39,20 @@ public class add_group extends AppCompatActivity {
     EditText memberNumber;
     String number;
 
+    ArrayList<String> membersnum=new ArrayList<String>();//memberNameCopy
+    ArrayAdapter<String> adapter;
+    ListView GroupList;
+
     ArrayList<String> members=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_group);
+        GroupList=(ListView)findViewById(R.id.input_member_list);
+        adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,membersnum);
+
+        GroupList.setAdapter(adapter);
 
         Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
@@ -61,7 +69,6 @@ public class add_group extends AppCompatActivity {
         Button button=(Button) findViewById(R.id.group_member_button); //번호 조회하여 추가
 
         memberNumber=(EditText)findViewById(R.id.input_member_number);
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,18 +78,34 @@ public class add_group extends AppCompatActivity {
               add_group.CustomTask task=new add_group.CustomTask();
               try {
                   number=memberNumber.getText().toString();
-                  result = task.execute(number).get();
+                  int mlen=membersnum.size();
+                  int mflag=10;
+                  for(int i=0;i<mlen;i++){
+                      if(number.equals(members.get(i))) {
+                          mflag=5;
+                          
+                      }
+                  }
+                  if(mflag==10) {
+                      result = task.execute(number).get();
+                      if(!result.isEmpty()) {
+                          ArrayList<String> membersnumtemp=new ArrayList<String>();
+                          membersnumtemp.addAll(membersnum);
+                          membersnumtemp.add(result);
+                          membersnum.clear();
+                          membersnum.addAll(membersnumtemp);
+                          adapter.notifyDataSetChanged();
+                          memberNumber.setText(null);
+                          showMessage(result);
+                      }
+                  }
               }catch(Exception e){
 
               }
-                showMessage(result);
+                memberNumber.setText(null);
             }
         });
 
-        String[] GroupData={"null"};
-        ListView GroupList=(ListView)findViewById(R.id.input_member_list);
-        ArrayAdapter<String> Adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,GroupData);
-        GroupList.setAdapter(Adapter);
 
         FloatingActionButton button1=(FloatingActionButton) findViewById(R.id.RegisterS);
 
@@ -120,6 +143,7 @@ public class add_group extends AppCompatActivity {
 
               members.add(number);
               memberNumber.setText(null);
+
               /*
               String result;
               add_group.CustomTask task=new add_group.CustomTask();
@@ -137,6 +161,12 @@ public class add_group extends AppCompatActivity {
           public void onClick(DialogInterface dialog, int which) {
               dialog.cancel();
               memberNumber.setText(null);
+              ArrayList<String> membersnumtemp=new ArrayList<String>();
+              membersnumtemp.addAll(membersnum);
+              membersnumtemp.remove((membersnum.size()-1));
+              membersnum.clear();
+              membersnum.addAll(membersnumtemp);
+              adapter.notifyDataSetChanged();
           }
       });
       AlertDialog alertDialog=builder.create();
