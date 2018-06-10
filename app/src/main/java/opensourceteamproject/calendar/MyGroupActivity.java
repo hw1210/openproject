@@ -122,31 +122,35 @@ public class MyGroupActivity extends AppCompatActivity {
             MyGroupActivity.CustomTask task = new MyGroupActivity.CustomTask();
             try {
                 result = task.execute(giddata[j].toString()).get();
-                Toast.makeText(getApplicationContext(), "r+"+result.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "그룹명:"+GroupDatatemp.get(j).toString(), Toast.LENGTH_LONG).show();
                 if(!result.isEmpty()) {
                     ttline = result.split("&");
                     String a = "";
                     String b = "";
                     for (int i = 0; i < ttline.length; i++) {
-                        if (i % 2 == 0) a = ttline[i].toString() + "/";
-                        else b = ttline[i].toString() + "/";
+                        Toast.makeText(getApplicationContext(),"line:"+ttline[i].toString(), Toast.LENGTH_LONG).show();
+
+                         a = ttline[i].toString() + "/";
+                     //   else b = ttline[i].toString() + "/";
                     }
                     ttname = a.split("/");
                    tnamelist.add(ttname);
-                    ttdate = b.split("/");
-                    tdatelist.add(ttdate);
+                   // ttdate = b.split("/");
+                    //tdatelist.add(ttdate);
+/*
+                    for(int i=0;i<tnamelist.get(i).length;i++){
+                        for(int jj=0;jj<tnamelist.get(i).length;jj++){
+                            if(jj%2==0)Toast.makeText(getApplicationContext(),"name:"+(tnamelist.get(i))[jj].toString(), Toast.LENGTH_LONG).show();
+                                if(jj%2!=0)Toast.makeText(getApplicationContext(),"date:"+(tnamelist.get(i))[jj].toString(), Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getApplicationContext(),"date:"+(tdatelist.get(i))[jj].toString(), Toast.LENGTH_LONG).show();
+                        }
+                        Toast.makeText(getApplicationContext(),"next",Toast.LENGTH_LONG).show();
+                    }*/
                }
             } catch (Exception e) {
 
             }
 ////////////////name:에 번갈아토스트//////////////////////////////////////////////////////////홀수일때는 name 짝수일때는 date출력
-        }
-        for(int i=0;i<tnamelist.size();i++){
-            for(int j=0;j<tnamelist.get(i).length;j++){
-                Toast.makeText(getApplicationContext(),"name:"+(tnamelist.get(i))[j].toString(), Toast.LENGTH_LONG).show();
-           //    Toast.makeText(getApplicationContext(),"date:"+(tdatelist.get(i))[j].toString(), Toast.LENGTH_LONG).show();
-            }
-            Toast.makeText(getApplicationContext(),"next",Toast.LENGTH_LONG).show();
         }
 
         /*data_container=new Data("D-10","오픈소스","2018/06/11");
