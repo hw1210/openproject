@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 
@@ -166,6 +167,7 @@ public class MonthAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Log.d(TAG, "getView(" + position + ") called.");
 
+
         MonthItemView itemView;
         if (convertView == null) {
             itemView = new MonthItemView(mContext);
@@ -175,8 +177,7 @@ public class MonthAdapter extends BaseAdapter {
 
         // create a params
         GridView.LayoutParams params = new GridView.LayoutParams(
-                GridView.LayoutParams.MATCH_PARENT,
-                120);
+                GridView.LayoutParams.MATCH_PARENT,250);
 
         // calculate row and column
         int rowIndex = position / countColumn;

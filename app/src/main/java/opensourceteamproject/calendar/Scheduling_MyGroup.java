@@ -218,7 +218,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
     View.OnClickListener CancelSClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Toast.makeText(getApplicationContext(),"취소되었습니다.",Toast.LENGTH_SHORT).show();
-            Intent intent=new Intent(getApplicationContext(),Scheduling_MyGroup.class);
+            Intent intent=new Intent(getApplicationContext(),MyGroupActivity.class);
             intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
