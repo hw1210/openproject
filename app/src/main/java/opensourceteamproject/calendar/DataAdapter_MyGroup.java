@@ -60,7 +60,11 @@ public class DataAdapter_MyGroup extends BaseExpandableListAdapter{
     /* Paren tList View */
     @Override
     public int getGroupCount() {
-        return dataList.size();
+        try{
+            return dataList.size();
+        }catch(NullPointerException e){
+            return 0;
+        }
     }
 
     @Override

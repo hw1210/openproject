@@ -243,8 +243,10 @@ public class Scheduling_MyGroup extends AppCompatActivity {
 /////////////////////////////////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁ
             String result;
             Scheduling_MyGroup.CustomTask task=new CustomTask();
+            String temp="";
 
-            String temp=giddata[ponum].toString();
+            if(!giddata[ponum].toString().isEmpty())
+                temp=giddata[ponum].toString();
 
             title=btn_title.getText().toString();
       //      Toast.makeText(getApplicationContext(),title+"d"+dDay+"d"+dateAndTime+"d"+allDay+"d"+temp,Toast.LENGTH_LONG).show();

@@ -39,7 +39,7 @@ public class MyGroupActivity extends AppCompatActivity {
     Data data_container;
     ArrayList<Data> instanceList=new ArrayList<Data>();;
     Data_Group GroupData;
-    ArrayList<Data_Group> instance;
+    ArrayList<Data_Group> instance=new ArrayList<>();
     DataAdapter_MyGroup dataAdapter;
     ExpandableListView listView;
     String[] giddata;
@@ -134,7 +134,7 @@ public class MyGroupActivity extends AppCompatActivity {
                         String b = "";
                         for (int i = 0; i < ttline.length; i++) {
                             //Toast.makeText(getApplicationContext(),"line:"+ttline[i].toString(), Toast.LENGTH_LONG).show();
-                            instanceList.add(new Data("", ttline[i], ""));
+                            instanceList.add(new Data("", ttline[i].toString(), ""));
                             a = ttline[i].toString() + "/";
                             //   else b = ttline[i].toString() + "/";
                         }
@@ -171,7 +171,7 @@ public class MyGroupActivity extends AppCompatActivity {
             //instanceList[그룹(id).add(data_container[i]);
         }*/
         //GroupData=new Data_Group("",instanceList);
-        instance=new ArrayList<Data_Group>();
+     //   instance=new ArrayList<Data_Group>();
         //instance.add(GroupData);
 
         /*for(int j=0;GroupData[j].equals(null);j++){
