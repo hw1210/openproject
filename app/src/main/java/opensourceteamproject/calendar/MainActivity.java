@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -51,8 +52,16 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.os.Build.VERSION;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+public class MainActivity extends AppCompatActivity {
+    String ipchange="192.168.0.2";
     GridView monthView;
     Button btn_myGroup;
     Button btn_mySelf;
@@ -63,19 +72,19 @@ public class MainActivity extends AppCompatActivity {
     int curMonth;
     private static final int PERMISSIONS_REQUEST_READ_PHONE_STATE=1000;
 
+    String phoneNum;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-        setTitle("Calendar");
+        //setTitle("Calendar");
 
         Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(Color.rgb(93,181,164));
         toolbar.setTitleTextColor(Color.WHITE);
 
-
+        phoneNum=null;
         monthView = (GridView) findViewById(R.id.monthView);
         monthViewAdapter = new MonthAdapter(this);
         monthView.setAdapter(monthViewAdapter);
@@ -112,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-         ImageButton monthNext = (ImageButton) findViewById(R.id.monthNext);
+        ImageButton monthNext = (ImageButton) findViewById(R.id.monthNext);
         monthNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 monthViewAdapter.setNextMonth();
@@ -123,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
         });
         /*전화번호 접근 권한 허가 여부 및 작업*/
 
-        String phoneNum=null;
         //if : version check
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             int permissionResult=checkSelfPermission(Manifest.permission.READ_PHONE_STATE);
@@ -161,15 +169,30 @@ public class MainActivity extends AppCompatActivity {
                 TelephonyManager telmanager=(TelephonyManager)getSystemService(TELEPHONY_SERVICE);
                 phoneNum= telmanager.getLine1Number();
                 phoneNum = phoneNum.replace("+82", "0");
-                Toast.makeText(getApplicationContext(),phoneNum,Toast.LENGTH_LONG).show();
+                ///////////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ3
+                String result;
+                CustomTask task=new CustomTask();
+                try {
+                    result = task.execute(phoneNum).get();
+                }catch(Exception e){
+
+                }
+                /////////////////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
             }
         }//end if : version check
         else{
             TelephonyManager telmanager=(TelephonyManager)getSystemService(TELEPHONY_SERVICE);
             phoneNum= telmanager.getLine1Number();
             phoneNum = phoneNum.replace("+82", "0");
-            Toast.makeText(getApplicationContext(),phoneNum,Toast.LENGTH_LONG).show();
+            ///////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ1
+            String result;
+            CustomTask task=new CustomTask();
+            try {
+                result = task.execute(phoneNum).get();
+            }catch(Exception e){
 
+            }
+            /////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
         }
     }
 
@@ -197,7 +220,15 @@ public class MainActivity extends AppCompatActivity {
                             TelephonyManager telmanager=(TelephonyManager)getSystemService(TELEPHONY_SERVICE);
                             phoneNum= telmanager.getLine1Number();
                             phoneNum = phoneNum.replace("+82", "0");
-                            Toast.makeText(getApplicationContext(),phoneNum,Toast.LENGTH_LONG).show();
+                            //////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ2
+                            String result;
+                            CustomTask task=new CustomTask();
+                            try {
+                                result = task.execute(phoneNum).get();
+                            }catch(Exception e){
+
+                            }
+                            ////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
                         }
                     }
                     else{
@@ -225,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener btn_myGroupClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MyGroupActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -232,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener MakeSClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),SchedulingActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -240,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener btn_mySelfClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MySelfActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -250,38 +284,82 @@ public class MainActivity extends AppCompatActivity {
 
         switch(item.getItemId()) {
 
-            case R.id.menu_bt1:
+                case R.id.menu_bt1:
 
-                Intent intent1 =new Intent(getApplicationContext(),Group_List.class);
-                startActivity(intent1);
-                finish();
-                return true;
+                    Intent intent1 =new Intent(MainActivity.this,Group_List.class);
+                    intent1.putExtra("phoneNum",phoneNum);
+                    startActivity(intent1);
+                    finish();
+                    return true;
 
-            case R.id.menu_bt2:
+                case R.id.menu_bt3:
 
-                Intent intent2 =new Intent(getApplicationContext(),view_group.class);
-                startActivity(intent2);
-                finish();
-                return true;
+                    Intent intent3 =new Intent(MainActivity.this,theme.class);
+                    intent3.putExtra("phoneNum",phoneNum);
+                   Toast.makeText(getApplicationContext(),phoneNum,Toast.LENGTH_LONG).show();
+                   startActivity(intent3);
+                    finish();
+                    return true;
 
-            case R.id.menu_bt3:
+                case R.id.menu_bt4:
 
-                Intent intent3 =new Intent(getApplicationContext(),theme.class);
-                startActivity(intent3);
-                finish();
-                return true;
-
-            case R.id.menu_bt4:
-
-                Intent intent4 =new Intent(getApplicationContext(),setting.class);
-                startActivity(intent4);
-                finish();
-                return true;
+                    Intent intent4 =new Intent(MainActivity.this,setting.class);
+                    intent4.putExtra("phoneNum",phoneNum);
+                    startActivity(intent4);
+                    finish();
+                    return true;
 
         }
 
         return false;
 
     }
+
+    /////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ4
+    class CustomTask extends AsyncTask<String,Void,String> {
+        String sMsg,rMsg;
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                // StringBuffer sMsg=new StringBuffer();
+                URL url=new URL("http://"+ipchange+":8084/dbconn/selectuserinfo.jsp"); //보낼 jsp 경로
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");
+
+                OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
+                sMsg="upnum="+strings[0];
+            /*
+            PrintWriter pwr=new PrintWriter(osw);
+            sMsg.append("upnum").append(" = ").append(strings[0]);
+
+            pwr.write(sMsg.toString());
+            */
+                osw.write(sMsg);
+                osw.flush();
+                //jsp 통신 ok
+                if(conn.getResponseCode()==conn.HTTP_OK){
+                    InputStreamReader tmp=new InputStreamReader(conn.getInputStream(),"UTF-8");
+                    String str;
+                    BufferedReader reader=new BufferedReader(tmp);
+                    StringBuffer buffer=new StringBuffer();
+                    //jsp에서 보낸 값 받기
+                    while((str=reader.readLine())!=null){
+                        buffer.append(str);
+                    }
+                    rMsg=buffer.toString();
+                }
+                else{
+                    Log.i("통신결과",conn.getResponseCode()+"에러");
+
+                }
+            }
+            catch(MalformedURLException e){e.printStackTrace();}
+            catch(IOException e){e.printStackTrace();}
+            return rMsg;
+        }
+    }
+/////////////////////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
 
 }

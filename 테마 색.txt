@@ -1,0 +1,19 @@
+red
+233 119 120 
+E97778
+
+light-green(default)
+93 181 164
+5DB5A4
+
+yellow
+255 213 126
+FFD57E
+
+purple
+173 132 199
+AD84C7
+
+blue
+121 152 201
+7998C9

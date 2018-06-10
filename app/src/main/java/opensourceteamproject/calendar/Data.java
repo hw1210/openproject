@@ -10,6 +10,7 @@ public class Data {
         this.title = title;
         this.date = date;
     }
+
     String getDDay() { return dDay; }
 
     String getTitle(){

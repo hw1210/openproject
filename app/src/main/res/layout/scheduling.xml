@@ -28,7 +28,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
                 android:text="@string/홈" />
 
             <Button
@@ -37,7 +36,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
                 android:text="@string/개인일정" />
 
             <Button
@@ -46,17 +44,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
                 android:text="@string/그룹일정" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
+    <LinearLayout
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/Toolbar">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/새로운일정" />
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="435dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:layout_constraintTop_toBottomOf="@+id/Title"
-        app:layout_constraintBottom_toTopOf="@+id/RegisterS">
+        app:layout_constraintTop_toBottomOf="@+id/Title">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -94,6 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="@string/일정입력"
+                android:inputType="text"
                 android:textSize="15sp" />
 
             <LinearLayout
@@ -115,13 +125,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:calendarViewShown="false"
-                    android:datePickerMode="spinner"></DatePicker>
+                    android:datePickerMode="spinner" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/list_allDay"
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -158,7 +169,7 @@
                     android:id="@+id/select_startTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:timePickerMode="spinner"/>
+                    android:timePickerMode="spinner" />
             </LinearLayout>
 
             <LinearLayout
@@ -179,7 +190,7 @@
                     android:id="@+id/select_endTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:timePickerMode="spinner"/>
+                    android:timePickerMode="spinner" />
             </LinearLayout>
 
             <LinearLayout
@@ -199,9 +210,9 @@
                     android:id="@+id/select_calendar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:textOff="@string/그룹"
-                    android:textOn="@string/개인"
-                    android:checked="true" />
+                    android:textOn="@string/개인" />
             </LinearLayout>
 
             <LinearLayout
@@ -234,11 +245,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="17dp"
         android:layout_marginEnd="17dp"
-        android:layout_marginRight="17dp"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/ic_action_puls" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/CancelS"
@@ -246,11 +256,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_delete" />
+        app:srcCompat="@drawable/ic_action_cancle" />
 
 
 </android.support.constraint.ConstraintLayout>

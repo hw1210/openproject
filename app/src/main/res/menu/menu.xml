@@ -6,10 +6,6 @@
         android:title="@string/그룹생성"
         app:showAsAction="never" />
 
-    <item android:id="@+id/menu_bt2"
-        android:title="@string/그룹표시"
-        app:showAsAction="never" />
-
     <item android:id="@+id/menu_bt3"
         android:title="@string/테마설정"
         app:showAsAction="never" />

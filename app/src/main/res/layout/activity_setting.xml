@@ -26,7 +26,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
                 android:text="@string/홈" />
 
             <Button
@@ -35,7 +34,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
                 android:text="@string/개인일정" />
 
             <Button
@@ -44,10 +42,62 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
                 android:text="@string/그룹일정" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
+    <LinearLayout
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/Toolbar">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/설정" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/Title">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/이름설정" />
+
+            <EditText
+                android:id="@+id/input_myName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:textSize="15sp"
+                android:ems="10"
+                android:hint="@string/이름입력"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/myName_button"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="@string/설정" />
+
+        </LinearLayout>
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

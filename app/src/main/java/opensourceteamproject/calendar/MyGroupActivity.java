@@ -22,11 +22,11 @@ public class MyGroupActivity extends AppCompatActivity {
     Button btn_myHome;
     ToggleButton btn_calendar;
 
-    ArrayList<Data> instanceList = new ArrayList<>();
-    ArrayList<Data> instanceList1 = new ArrayList<>();
-    ArrayList<Data_Group> instance = new ArrayList<>();
-    Data data_container1,data_container2,data_container3;
-    Data_Group data_container0,data_container00;
+    String phoneNum="";
+    Data data_container;
+    ArrayList<Data> instanceList=new ArrayList<Data>();;
+    Data_Group GroupData;
+    ArrayList<Data_Group> instance;
     DataAdapter_MyGroup dataAdapter;
     ExpandableListView listView;
 
@@ -34,6 +34,8 @@ public class MyGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mygroup);
+        Intent rintent=new Intent(this.getIntent());
+        phoneNum=rintent.getStringExtra("phoneNum");
 
         Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
@@ -54,17 +56,23 @@ public class MyGroupActivity extends AppCompatActivity {
     }
 
     public void initListView() {
-        data_container1=new Data("D-10","오픈소스","2018/06/11");
-        data_container2=new Data("D-100","데베","2018/06/11");
-        data_container3=new Data("D-1000","가나다라마바사아자차카타파하","2018/06/11");
-        instanceList.add(data_container1);instanceList.add(data_container2);instanceList.add(data_container3);
+        /*data_container=new Data("D-10","오픈소스","2018/06/11");
+        instanceList.add(data_container);*/
 
-        data_container0=new Data_Group("그룹1",instanceList);
-        data_container00=new Data_Group("그룹2",instanceList1);
-        instance.add(data_container0);instance.add(data_container00);
+        /*for(int i=0;data_container[i].equals(null);i++){ //할 일
+            data_container[i]=null;//new Data=(dday,할일명,날짜);
+            //instanceList[그룹(id).add(data_container[i]);
+        }*/
+        //GroupData=new Data_Group("",instanceList);
+        instance=new ArrayList<Data_Group>();
+        //instance.add(GroupData);
+
+        /*for(int j=0;GroupData[j].equals(null);j++){
+            GroupData[j]=null;//new Data_Group(그룹명,할일리스트);
+            instance.add(GroupData[j]); //리스트뷰에 넣을 그룹리스트 합
+        }*/
 
         dataAdapter = new DataAdapter_MyGroup(this, instance);
-
         listView = (ExpandableListView) findViewById(R.id.list_myGroup);
         listView.setAdapter(dataAdapter);
     }
@@ -83,20 +91,15 @@ public class MyGroupActivity extends AppCompatActivity {
             case R.id.menu_bt1:
 
                 Intent intent1 =new Intent(getApplicationContext(),Group_List.class);
+                intent1.putExtra("phoneNum",phoneNum);
                 startActivity(intent1);
-                finish();
-                return true;
-
-            case R.id.menu_bt2:
-
-                Intent intent2 =new Intent(getApplicationContext(),view_group.class);
-                startActivity(intent2);
                 finish();
                 return true;
 
             case R.id.menu_bt3:
 
                 Intent intent3 =new Intent(getApplicationContext(),theme.class);
+                intent3.putExtra("phoneNum",phoneNum);
                 startActivity(intent3);
                 finish();
                 return true;
@@ -104,6 +107,7 @@ public class MyGroupActivity extends AppCompatActivity {
             case R.id.menu_bt4:
 
                 Intent intent4 =new Intent(getApplicationContext(),setting.class);
+                intent4.putExtra("phoneNum",phoneNum);
                 startActivity(intent4);
                 finish();
                 return true;
@@ -116,6 +120,7 @@ public class MyGroupActivity extends AppCompatActivity {
     View.OnClickListener btn_myHomeClickListener=new View.OnClickListener() {
         public void onClick(View v) {
             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -123,6 +128,7 @@ public class MyGroupActivity extends AppCompatActivity {
     View.OnClickListener btn_mySelfClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),MySelfActivity.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
@@ -130,6 +136,7 @@ public class MyGroupActivity extends AppCompatActivity {
     View.OnClickListener MakeSClickListener=new View.OnClickListener(){
         public void onClick(View v){
             Intent intent=new Intent(getApplicationContext(),Scheduling_MyGroup.class);
+            intent.putExtra("phoneNum",phoneNum);
             startActivity(intent);
             finish();
         }
