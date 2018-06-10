@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         monthText = (TextView) findViewById(R.id.monthText);
         setMonthText();
 
-        Button monthPrevious = (Button) findViewById(R.id.monthPrevious);
+        ImageButton monthPrevious = (ImageButton) findViewById(R.id.monthPrevious);
         monthPrevious.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 monthViewAdapter.setPreviousMonth();
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-         Button monthNext = (Button) findViewById(R.id.monthNext);
+         ImageButton monthNext = (ImageButton) findViewById(R.id.monthNext);
         monthNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 monthViewAdapter.setNextMonth();

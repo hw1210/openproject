@@ -40,11 +40,9 @@ public class Group_List extends AppCompatActivity {
         btn_mySelf.setOnClickListener(btn_mySelfClickListener);
 
 
-        final String[] GroupData={"오픈소스","데베","컴그"};//sample
-
         ListView GroupList=(ListView)findViewById(R.id.group_list);
 
-       ArrayAdapter<String> Adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,GroupData);
+       ArrayAdapter<String> Adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
         GroupList.setAdapter(Adapter);
 
         GroupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
