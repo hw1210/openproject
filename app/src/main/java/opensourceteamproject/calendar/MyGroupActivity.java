@@ -56,6 +56,7 @@ public class MyGroupActivity extends AppCompatActivity {
         setContentView(R.layout.mygroup);
         Intent rintent=new Intent(this.getIntent());
         phoneNum=rintent.getStringExtra("phoneNum");
+        Toast.makeText(getApplicationContext(),phoneNum,Toast.LENGTH_LONG).show();
         tdatelist=new ArrayList<String[]>();
         tnamelist=new ArrayList<String[]>();
         Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.Toolbar);
@@ -78,6 +79,8 @@ public class MyGroupActivity extends AppCompatActivity {
 
     public void initListView() {
 
+        Intent rintent=new Intent(this.getIntent());
+        phoneNum=rintent.getStringExtra("phoneNum");
         GroupDatatemp=new ArrayList<>();
 
         /*ArrayAdapter<String> adapter_group=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,GroupData);

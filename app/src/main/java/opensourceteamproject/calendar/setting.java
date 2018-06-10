@@ -32,7 +32,7 @@ public class setting extends AppCompatActivity {
 
     String phoneNum="";
     String name;
-
+    EditText myName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public class setting extends AppCompatActivity {
         btn_mySelf=(Button)findViewById(R.id.mySelf);
         btn_mySelf.setOnClickListener(btn_mySelfClickListener);
 
-        EditText myName=(EditText)findViewById(R.id.input_myName);
+        myName=(EditText)findViewById(R.id.input_myName);
         Button setting=(Button)findViewById(R.id.myName_button);
 
         name=myName.getText().toString();
@@ -109,7 +109,9 @@ public class setting extends AppCompatActivity {
 
             setting.CustomTask task=new setting.CustomTask();
             try {
-                result = task.execute(name).get();
+
+                name=myName.getText().toString();
+                result = task.execute(name,phoneNum).get();
             }catch(Exception e){
 
             }
@@ -156,13 +158,13 @@ public class setting extends AppCompatActivity {
         protected String doInBackground(String... strings) {//빨간줄 떠서 막음
             try{
                 // StringBuffer sMsg=new StringBuffer();
-                URL url=new URL("http://"+ipchange+":8084/dbconn/selectuserinfo.jsp"); //보낼 jsp 경로
+                URL url=new URL("http://"+ipchange+":8084/dbconn/settinginfo.jsp"); //보낼 jsp 경로
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
                 conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");
 
                 OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
-                sMsg="name="+strings[0];
+                sMsg="name="+strings[0]+"&"+"upnum="+strings[1];
             /*
             PrintWriter pwr=new PrintWriter(osw);
             sMsg.append("upnum").append(" = ").append(strings[0]);
