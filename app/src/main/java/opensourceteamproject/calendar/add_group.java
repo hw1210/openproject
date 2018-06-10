@@ -142,9 +142,7 @@ public class add_group extends AppCompatActivity {
                     try {
                         gname = grname.getText().toString();
                         String numtemp=members.get(i).toString();
-                        Toast.makeText(getApplicationContext(),"+r3"+numtemp,Toast.LENGTH_LONG).show();
                         result3 = task3.execute(result2,numtemp).get();
-                        Toast.makeText(getApplicationContext(),"+r3"+result3,Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
 
                     }

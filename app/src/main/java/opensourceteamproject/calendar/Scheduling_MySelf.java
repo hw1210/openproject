@@ -33,7 +33,7 @@ import java.net.URL;
 
 public class Scheduling_MySelf extends AppCompatActivity {
   //  String ipchange="172.16.29.64";
-  String ipchange="192.168..0.2";
+  String ipchange="192.168.0.2";
     FloatingActionButton btn_RegisterS,btn_CancelS;
 
     String phoneNum="";
@@ -178,12 +178,16 @@ public class Scheduling_MySelf extends AppCompatActivity {
     View.OnClickListener RegisterSClickListener=new View.OnClickListener(){
         public void onClick(View v){
             String result;
+            title=btn_title.getText().toString();
+            //
             CustomTask task=new CustomTask();
             try {
-                result = task.execute(title,dDay,dateAndTime,allDay,group).get();
+                result = task.execute(title,dDay,dateAndTime,allDay,phoneNum).get();
+                Toast.makeText(getApplicationContext(),result,Toast.LENGTH_LONG).show();
             }catch(Exception e){
 
             }
+
             Toast.makeText(getApplicationContext(),"새로운 일정이 생성되었습니다.",Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(getApplicationContext(),MySelfActivity.class);
             intent.putExtra("phoneNum",phoneNum);
@@ -226,13 +230,13 @@ public class Scheduling_MySelf extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try{
                 // StringBuffer sMsg=new StringBuffer();
-                URL url=new URL("http://"+ipchange+":8084/dbconn/selectuserinfo.jsp"); //보낼 jsp 경로
+                URL url=new URL("http://"+ipchange+":8084/dbconn/insertmyselftodo.jsp"); //보낼 jsp 경로
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
                 conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");
 
                 OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
-                sMsg="dDay="+strings[0]+"&"+"title="+strings[1]+"&"+"allDay="+strings[2]+"&"+"dateAndTime="+strings[3]+"&"+"group="+strings[4];
+                sMsg="title="+strings[0]+"&"+"dday="+strings[1]+"&"+"dateandtime="+strings[2]+"&"+"allday="+strings[3]+"&"+"upnum="+strings[4];
             /*
             PrintWriter pwr=new PrintWriter(osw);
             sMsg.append("upnum").append(" = ").append(strings[0]);
@@ -263,4 +267,5 @@ public class Scheduling_MySelf extends AppCompatActivity {
             return rMsg;
         }
     }
+
 }

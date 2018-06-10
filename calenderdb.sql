@@ -28,8 +28,8 @@ tname varchar(20) default 'null',
 tgid mediumint default NULL,
 tuid mediumint default NULL,
 tallday smallint default 0,
-tsdate int(20) default NULL,
-tedate int(20) default NULL,
+tdday smallint default 0,
+tdate int(30) default NULL,
 foreign key(tgid) references groupuser(gugid) on update cascade on delete cascade,
 foreign key(tuid) references userinfo(uid) on update cascade on delete cascade
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

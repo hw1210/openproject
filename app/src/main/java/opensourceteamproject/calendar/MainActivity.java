@@ -174,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 CustomTask task=new CustomTask();
                 try {
                     result = task.execute(phoneNum).get();
+                    Toast.makeText(getApplicationContext(),"++"+result,Toast.LENGTH_LONG).show();
                 }catch(Exception e){
 
                 }
@@ -189,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
             CustomTask task=new CustomTask();
             try {
                 result = task.execute(phoneNum).get();
+                Toast.makeText(getApplicationContext(),"++"+result,Toast.LENGTH_LONG).show();
             }catch(Exception e){
 
             }
@@ -225,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
                             CustomTask task=new CustomTask();
                             try {
                                 result = task.execute(phoneNum).get();
+                                Toast.makeText(getApplicationContext(),"++"+result,Toast.LENGTH_LONG).show();
                             }catch(Exception e){
 
                             }
@@ -323,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try{
                 // StringBuffer sMsg=new StringBuffer();
-                URL url=new URL("http://"+ipchange+":8084/dbconn/selectuserinfo.jsp"); //보낼 jsp 경로
+                URL url=new URL("http://"+ipchange+":8084/dbconn/insertuserinfo.jsp"); //보낼 jsp 경로
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
                 conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");

@@ -36,7 +36,7 @@ import java.util.ArrayList;
 
 public class Scheduling_MyGroup extends AppCompatActivity {
  //   String ipchange="172.16.29.64";
- String ipchange="192.168..0.2";
+ String ipchange="192.168.0.2";
     FloatingActionButton btn_RegisterS,btn_CancelS;
 
     String phoneNum="";
@@ -50,16 +50,18 @@ public class Scheduling_MyGroup extends AppCompatActivity {
     Button btn_myGroup;
     Button btn_myHome;
     EditText btn_title;
-
+    String[] giddata;
     int scheduleYear,scheduleMonth,scheduleDay,startHour,startMinute,endHour,endMinute;
     ArrayList<String> GroupData;
-
+    ArrayList<String> GroupDatatemp=new ArrayList<String>();
+    ArrayAdapter<String> adapter_group;
     String title="";
     String dDay="1";
     String dateAndTime="";
     String allDay="1";
     String group="";
-
+    String groupstr="";
+    int ponum;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scheduling);
@@ -70,7 +72,7 @@ public class Scheduling_MyGroup extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(Color.rgb(93,181,164));
         toolbar.setTitleTextColor(Color.WHITE);
-
+        ///////////////////////////////////////
         btn_RegisterS=(FloatingActionButton)findViewById(R.id.RegisterS);
         btn_RegisterS.setOnClickListener(RegisterSClickListener);
         btn_CancelS=(FloatingActionButton)findViewById(R.id.CancelS);
@@ -113,17 +115,54 @@ public class Scheduling_MyGroup extends AppCompatActivity {
 
         dateAndTime=scheduleYear+"-"+scheduleMonth+"-"+scheduleDay+"-"+startHour+"-"+startMinute+"-"+endHour+"-"+endMinute;
 
+
+
         GroupData=new ArrayList<>();
+        /*ArrayAdapter<String> adapter_group=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,GroupData);
+        btn_group.setPrompt("");
+        btn_group.setAdapter(adapter_group);
+        btn_group.setOnItemSelectedListener(groupSelectedListener);
+*/
+        ///////////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
+        String result2;
+
+        Scheduling_MyGroup.CustomTask2 task2=new CustomTask2();
+        try {
+
+            result2 = task2.execute(phoneNum).get();
+            Toast.makeText(getApplicationContext(), "**" + result2, Toast.LENGTH_LONG).show();
+            giddata = result2.split("/");
+
+            String result3;
+            String sam = "";
+            for (int i = 0; i < giddata.length; i++) {
+
+                Scheduling_MyGroup.CustomTask3 task3 = new CustomTask3();
+                try {
+                    result3 = task3.execute(giddata[i].toString()).get();
+                    GroupData.add(result3.toString());
+
+                } catch (Exception e) {
+
+                }
+                }
+            }catch(Exception e){
+
+            }
+
+        ///////////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
         ArrayAdapter<String> adapter_group=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,GroupData);
         btn_group.setPrompt("");
         btn_group.setAdapter(adapter_group);
         btn_group.setOnItemSelectedListener(groupSelectedListener);
+
     }
 
     AdapterView.OnItemSelectedListener groupSelectedListener=new AdapterView.OnItemSelectedListener(){
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            group=GroupData.get(position);
+           Toast.makeText(getApplicationContext(),"**"+position,Toast.LENGTH_LONG).show();
+           ponum=position;
         }
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
@@ -200,14 +239,22 @@ public class Scheduling_MyGroup extends AppCompatActivity {
 
     View.OnClickListener RegisterSClickListener=new View.OnClickListener(){
         public void onClick(View v){
-            String result;
 
+/////////////////////////////////////////////////////////////////////////////////////////////ㅁㅁㅁㅁㅁㅁㅁㅁㅁ
+            String result;
             Scheduling_MyGroup.CustomTask task=new CustomTask();
+
+            String temp=giddata[ponum].toString();
+
+            title=btn_title.getText().toString();
+      //      Toast.makeText(getApplicationContext(),title+"d"+dDay+"d"+dateAndTime+"d"+allDay+"d"+temp,Toast.LENGTH_LONG).show();
             try {
-                result = task.execute(title,dDay,dateAndTime,allDay,group).get();
+                result = task.execute(title,dDay,dateAndTime,allDay,temp).get();
+                Toast.makeText(getApplicationContext(),result,Toast.LENGTH_LONG).show();
             }catch(Exception e){
 
             }
+
             Toast.makeText(getApplicationContext(),"새로운 일정이 생성되었습니다.",Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(getApplicationContext(),MyGroupActivity.class);
             intent.putExtra("phoneNum",phoneNum);
@@ -252,14 +299,105 @@ public class Scheduling_MyGroup extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try{
                 // StringBuffer sMsg=new StringBuffer();
-                URL url=new URL("http://"+ipchange+":8084/dbconn/selectuserinfo.jsp"); //보낼 jsp 경로
+                URL url=new URL("http://"+ipchange+":8084/dbconn/insertmygrouptodo.jsp"); //보낼 jsp 경로
                 HttpURLConnection conn=(HttpURLConnection)url.openConnection();
                 conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");
 
                 OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
-                sMsg="dDay="+strings[0]+"&"+"title="+strings[1]+"&"+"allDay="+strings[2]+"&"+"dateAndTime="+strings[3]+"&"+"group="+strings[4];
+                sMsg="title="+strings[0]+"&"+"dday="+strings[1]+"&"+"dateandtime="+strings[2]+"&"+"allday="+strings[3]+"&"+"group="+strings[4];
             /*
+            PrintWriter pwr=new PrintWriter(osw);
+            sMsg.append("upnum").append(" = ").append(strings[0]);
+
+            pwr.write(sMsg.toString());
+            */
+                osw.write(sMsg);
+                osw.flush();
+                //jsp 통신 ok
+                if(conn.getResponseCode()==conn.HTTP_OK){
+                    InputStreamReader tmp=new InputStreamReader(conn.getInputStream(),"UTF-8");
+                    String str;
+                    BufferedReader reader=new BufferedReader(tmp);
+                    StringBuffer buffer=new StringBuffer();
+                    //jsp에서 보낸 값 받기
+                    while((str=reader.readLine())!=null){
+                        buffer.append(str);
+                    }
+                    rMsg=buffer.toString();
+                }
+                else{
+                    Log.i("통신결과",conn.getResponseCode()+"에러");
+
+                }
+            }
+            catch(MalformedURLException e){e.printStackTrace();}
+            catch(IOException e){e.printStackTrace();}
+            return rMsg;
+        }
+    }
+
+    class CustomTask2 extends AsyncTask<String,Void,String> {
+        String sMsg,rMsg;
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                // StringBuffer sMsg=new StringBuffer();
+                URL url=new URL("http://"+ipchange+":8084/dbconn/selectgroupinfo.jsp"); //보낼 jsp 경로
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");
+
+                OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
+                sMsg="upnum="+strings[0];
+                /*
+            PrintWriter pwr=new PrintWriter(osw);
+            sMsg.append("upnum").append(" = ").append(strings[0]);
+
+            pwr.write(sMsg.toString());
+            */
+                osw.write(sMsg);
+                osw.flush();
+                //jsp 통신 ok
+                if(conn.getResponseCode()==conn.HTTP_OK){
+                    InputStreamReader tmp=new InputStreamReader(conn.getInputStream(),"UTF-8");
+                    String str;
+                    BufferedReader reader=new BufferedReader(tmp);
+                    StringBuffer buffer=new StringBuffer();
+                    //jsp에서 보낸 값 받기
+                    while((str=reader.readLine())!=null){
+                        buffer.append(str);
+                    }
+                    rMsg=buffer.toString();
+                }
+                else{
+                    Log.i("통신결과",conn.getResponseCode()+"에러");
+
+                }
+            }
+            catch(MalformedURLException e){e.printStackTrace();}
+            catch(IOException e){e.printStackTrace();}
+            return rMsg;
+        }
+    }
+
+
+    class CustomTask3 extends AsyncTask<String,Void,String> {
+        String sMsg,rMsg;
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                // StringBuffer sMsg=new StringBuffer();
+                URL url=new URL("http://"+ipchange+":8084/dbconn/selectmygrouplist.jsp"); //보낼 jsp 경로
+                HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+                conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");
+
+                OutputStreamWriter osw=new OutputStreamWriter(conn.getOutputStream(),"UTF-8");
+                sMsg="gid="+strings[0];
+                /*
             PrintWriter pwr=new PrintWriter(osw);
             sMsg.append("upnum").append(" = ").append(strings[0]);
 

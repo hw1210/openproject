@@ -176,7 +176,7 @@ public class MonthAdapter extends BaseAdapter {
         // create a params
         GridView.LayoutParams params = new GridView.LayoutParams(
                 GridView.LayoutParams.MATCH_PARENT,
-                120);
+                280);
 
         // calculate row and column
         int rowIndex = position / countColumn;
