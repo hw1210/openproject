@@ -101,11 +101,9 @@ public class MyGroupActivity extends AppCompatActivity {
 
                 MyGroupActivity.CustomTask3 task3 = new MyGroupActivity.CustomTask3();
                 try {
-                    result3 = task3.execute(giddata[i].toString()).get();
-                    GroupDatatemp.add(result3.toString());
-            Toast.makeText(getApplicationContext(),result3.toString(),Toast.LENGTH_LONG).show();
-
-
+                    result3 = task3.execute(giddata[i]).get();
+                    GroupDatatemp.add(result3);
+                    Toast.makeText(getApplicationContext(),result3,Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
 
                 }
@@ -114,36 +112,43 @@ public class MyGroupActivity extends AppCompatActivity {
 
         }
         String result;
-        for (int j = 0; j < giddata.length; j++) {
-            String[] ttname;
-            String[] ttdate;
-            String[] ttline;
-            String[] ttdday;
-            MyGroupActivity.CustomTask task = new MyGroupActivity.CustomTask();
-            try {
-                result = task.execute(giddata[j].toString()).get();
-                Toast.makeText(getApplicationContext(), "r+"+result.toString(), Toast.LENGTH_LONG).show();
-                if(!result.isEmpty()) {
-                    ttline = result.split("&");
-                    String a = "";
-                    String b = "";
-                    for (int i = 0; i < ttline.length; i++) {
-                        if (i % 2 == 0) a = ttline[i].toString() + "/";
-                        else b = ttline[i].toString() + "/";
+        try {
+            for (int j = 0; j < giddata.length; j++) {
+                String[] ttname;
+                String[] ttdate;
+                String[] ttline;
+                String[] ttdday;
+                MyGroupActivity.CustomTask task = new MyGroupActivity.CustomTask();
+                try {
+                    result = task.execute(giddata[j]).get();
+                    Toast.makeText(getApplicationContext(), "r+" + result, Toast.LENGTH_LONG).show();
+                    if (!result.isEmpty()) {
+                        ttline = result.split("&");
+                        String a = "";
+                        String b = "";
+                        instanceList=new ArrayList<>();
+                        for (int i = 0; i < ttline.length; i++) {
+                            if (i % 2 == 0) a = ttline[i] + "/";
+                            else b = ttline[i] + "/";
+                            instanceList.add(new Data("",a,b));
+                        }
+                        ttname = a.split("/");
+                        tnamelist.add(ttname);
+                        ttdate = b.split("/");
+                        tdatelist.add(ttdate);
+                        instance.add(new Data_Group(giddata[j],instanceList));
                     }
-                    ttname = a.split("/");
-                   tnamelist.add(ttname);
-                    ttdate = b.split("/");
-                    tdatelist.add(ttdate);
-               }
-            } catch (Exception e) {
+                } catch (Exception e) {
 
-            }
+                }
 ////////////////name:에 번갈아토스트//////////////////////////////////////////////////////////홀수일때는 name 짝수일때는 date출력
+            }
+        }catch(NullPointerException e){
+
         }
         for(int i=0;i<tnamelist.size();i++){
             for(int j=0;j<tnamelist.get(i).length;j++){
-                Toast.makeText(getApplicationContext(),"name:"+(tnamelist.get(i))[j].toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"name:"+(tnamelist.get(i))[j], Toast.LENGTH_LONG).show();
            //    Toast.makeText(getApplicationContext(),"date:"+(tdatelist.get(i))[j].toString(), Toast.LENGTH_LONG).show();
             }
             Toast.makeText(getApplicationContext(),"next",Toast.LENGTH_LONG).show();

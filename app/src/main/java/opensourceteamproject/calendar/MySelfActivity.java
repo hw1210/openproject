@@ -34,13 +34,13 @@ public class MySelfActivity extends AppCompatActivity{
     Button btn_myHome;
     //   String ipchange="172.16.29.64";
     String ipchange="192.168.0.2";
-String[] ttname;
-String[] ttdate;
-String[] ttline;
-String[] ttdday;
+    String[] ttname;
+    String[] ttdate;
+    String[] ttline;
+    String[] ttdday;
     String result;
     String phoneNum="";
-    Data data_container;
+    //Data data_container;
     ArrayList<Data> instanceList = new ArrayList<>();
     DataAdapter_MySelf dataAdapter;
     ListView listView;
@@ -69,20 +69,20 @@ String[] ttdday;
         MySelfActivity.CustomTask2 task2=new MySelfActivity.CustomTask2();
         try {
             result2 = task2.execute(result).get();
-            Toast.makeText(getApplicationContext(),result2.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),result2,Toast.LENGTH_LONG).show();
 
             ttline=result2.split("&");
             String a="";
             String b="";
             for(int i=0;i<ttline.length;i++){
-                if(i%2==0) a=ttline[i].toString()+"/";
-                else b=ttline[i].toString()+"/";
+                if(i%2==0) a=ttline[i]+"/";
+                else b=ttline[i]+"/";
             }
             ttname=a.split("/");
             ttdate=b.split("/");
 
             for(int i=0;i<ttname.length;i++){
-                Toast.makeText(getApplicationContext(),ttname[i].toString()+"a"+ttdate[i].toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),ttname[i]+"a"+ttdate[i],Toast.LENGTH_LONG).show();
             }
         }catch(Exception e){
 
@@ -120,53 +120,53 @@ String[] ttdday;
         btn_MakeS.setRippleColor(Color.rgb(93,181,164));
 
         initListView();
-
-
-
-
     }
 
     public void initListView() {
-        /*Date d=new Date();
+        Date d=new Date();
         String tempdate="";
-        for(int i=0;i<ttdate.length;i++){
-            tempdate=ttdate[i].substring(0,10)+"/";
+        try{
+            for(int i=0;i<ttdate.length;i++){
+                tempdate=ttdate[i].substring(0,10)+"/";
+
+            }
+
+        }catch(NullPointerException e) {
 
         }
+        try{
+            for(int i=0;i<ttdate.length;i++) {
+                ttdday = tempdate.split("/");
+            }
+        }catch(NullPointerException e){
 
-        for(int i=0;i<ttdate.length;i++){
-            ttdday=tempdate.split("/");
-        }
+         }
         long cal;
-        for(int i=0;i<ttdate.length;i++) {
-            String oTime = "";
-            Date currentDate;
-            cal=0;
-            SimpleDateFormat mSimpleDateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
-            Date currentTime = new Date();
-            oTime = mSimpleDateFormat.format(currentTime);//현재
-            try{
-                Date memDelStartDate = mSimpleDateFormat.parse(ttdday[i].toString());
+        try{
+            for(int i=0;i<ttdate.length;i++) {
+                String oTime = "";
+                Date currentDate;
+                cal=0;
+                SimpleDateFormat mSimpleDateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+                Date currentTime = new Date();
+                oTime = mSimpleDateFormat.format(currentTime);//현재
+                try{
+                    Date memDelStartDate = mSimpleDateFormat.parse(ttdday[i]);
 
-                currentDate=mSimpleDateFormat.parse(oTime);
-                int compare=currentDate.compareTo(memDelStartDate);
-                if(compare>0){cal=currentDate.getTime()-memDelStartDate.getTime(); cal=cal/(24*60*60*1000);}
-                if(compare<0){cal=memDelStartDate.getTime()-currentDate.getTime();cal=cal/(24*60*60*1000);}
-                else{cal=0;}
-                data_container=new Data(String.valueOf(cal),ttname[i].toString(),ttdday[i].toString());
-                instanceList.add(data_container);
-            }
-            catch (Exception e){
+                    currentDate=mSimpleDateFormat.parse(oTime);
+                    int compare=currentDate.compareTo(memDelStartDate);
+                    if(compare>0){cal=currentDate.getTime()-memDelStartDate.getTime(); cal=cal/(24*60*60*1000);}
+                    if(compare<0){cal=memDelStartDate.getTime()-currentDate.getTime();cal=cal/(24*60*60*1000);}
+                    else{cal=0;}
+                    instanceList.add(new Data(String.valueOf(cal),ttname[i],ttdday[i]));
+                }
+                catch (Exception e){
 
+                }
             }
+        }catch(NullPointerException e){
+
         }
-        for(int i=0;i<ttname.length;i++){
-           // data_container=new Data();
-        }*/
-        /*for(int i=0;data_container[i].equals(null);i++){
-            data_container[i]=null;
-            instanceList.add(data_container[i]);
-        }*/
         dataAdapter = new DataAdapter_MySelf(this, instanceList);
         listView = (ListView) findViewById(R.id.list_mySelf);
         listView.setAdapter(dataAdapter);
